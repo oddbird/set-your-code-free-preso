@@ -1,0 +1,17 @@
+hovercraft==1.1
+Pygments==1.6
+docutils==0.11
+lxml==3.3.1
+svg.path==1.1
+
+manuel==1.7.2
+six==1.5.2
+
+py==1.4.20
+pytest==2.5.2
+
+coverage==3.7.1
+tox==1.7.0
+virtualenv==1.11.4
+
+pretend == 1.0.7
