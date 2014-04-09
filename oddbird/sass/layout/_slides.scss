@@ -23,7 +23,7 @@
 // Title
 
 #title, #questions {
-  h1 { text-align: center; }
+  h1, h2 { text-align: center; }
 }
 
 .vcard {
@@ -68,4 +68,16 @@
 .innerStep {
   opacity: 0;
   &.stepped { @include animation(fadeInLeft 300ms both); }
+}
+
+.step[data-center="1"] { text-align: center; }
+
+.step img:not(.logo) {
+    @include box-shadow(0 0 .5em black);
+}
+
+#rtd img:nth-of-type(2) {
+    position: absolute;
+    top: -50px;
+    left: 700px;
 }

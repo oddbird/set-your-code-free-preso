@@ -46,7 +46,7 @@ em { font-style: italic; }
 p, ul, ol, pre { @include trailer; }
 
 ul {
-  list-style: disc;
+  list-style-type: none;
   @include leader(.5);
 }
 ol {
@@ -92,4 +92,9 @@ h1 tt {
 
 h2 tt {
   @include adjust-font-size-to($xsmallpx,1);
+}
+
+
+#license .code {
+  @include adjust-font-size-to(ms(-8),.35);
 }

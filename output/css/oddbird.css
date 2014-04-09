@@ -151,8 +151,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 }
 
 html {
-  font-size: 200%;
-  line-height: 1.1875em;
+  font-size: 300%;
+  line-height: 1.20833em;
 }
 
 * {
@@ -164,12 +164,12 @@ html {
 html {
   font-family: "BaskervilleFS", Baskerville, Palatino, Cambria, Georgia, serif;
   text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
-  background: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(51, 203, 255, 0.25)), color-stop(75%, rgba(204, 242, 255, 0.25))) no-repeat, url('../images/noise.png?1362240577') repeat fixed;
-  background: -webkit-linear-gradient(bottom, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1362240577') repeat fixed;
-  background: -moz-linear-gradient(bottom, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1362240577') repeat fixed;
-  background: -o-linear-gradient(bottom, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1362240577') repeat fixed;
-  background: linear-gradient(bottom, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1362240577') repeat fixed;
-  background: linear-gradient(to top, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1362240577') repeat fixed;
+  background: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, rgba(51, 203, 255, 0.25)), color-stop(75%, rgba(204, 242, 255, 0.25))) no-repeat, url('../images/noise.png?1393261554') repeat fixed;
+  background: -webkit-linear-gradient(bottom, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1393261554') repeat fixed;
+  background: -moz-linear-gradient(bottom, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1393261554') repeat fixed;
+  background: -o-linear-gradient(bottom, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1393261554') repeat fixed;
+  background: linear-gradient(bottom, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1393261554') repeat fixed;
+  background: linear-gradient(to top, rgba(51, 203, 255, 0.25), rgba(204, 242, 255, 0.25) 75%) no-repeat, url('../images/noise.png?1393261554') repeat fixed;
   height: 100%;
   color: #265f73;
 }
@@ -191,9 +191,9 @@ a:focus, a:hover, a:active {
 }
 
 h1 {
-  font-size: 2.0625rem;
-  line-height: 2.375rem;
-  margin-bottom: 0.59375rem;
+  font-size: 2.08333rem;
+  line-height: 2.41667rem;
+  margin-bottom: 0.60417rem;
   font-weight: bold;
 }
 h1 a:link, h1 a:visited {
@@ -207,14 +207,14 @@ h1:only-child {
 }
 
 h2 {
-  font-size: 1.1875rem;
-  line-height: 1.78125rem;
-  margin-bottom: 0.59375rem;
+  font-size: 1.20833rem;
+  line-height: 1.8125rem;
+  margin-bottom: 0.60417rem;
   font-weight: bold;
 }
 
 h3 {
-  margin-bottom: 0.59375rem;
+  margin-bottom: 0.60417rem;
 }
 
 h3, h4, strong {
@@ -226,45 +226,45 @@ em {
 }
 
 p, ul, ol, pre {
-  margin-bottom: 1.1875rem;
+  margin-bottom: 1.20833rem;
 }
 
 ul {
-  list-style: disc;
-  margin-top: 0.59375rem;
+  list-style-type: none;
+  margin-top: 0.60417rem;
 }
 
 ol {
   list-style: decimal-leading-zero;
-  margin-top: 0.59375rem;
+  margin-top: 0.60417rem;
 }
 
 li {
-  margin-bottom: 0.59375rem;
+  margin-bottom: 0.60417rem;
 }
 
 code, pre, tt {
   font-family: Consolas, Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
-  font-size: 0.65625rem;
-  line-height: 1.1875rem;
+  font-size: 0.66667rem;
+  line-height: 1.20833rem;
 }
 
 code {
   display: inline-block;
-  padding: 0 0.29688rem;
+  padding: 0 0.30208rem;
   background: rgba(0, 114, 153, 0.125);
 }
 
 pre {
-  line-height: 0.89063rem;
-  margin-bottom: 1.1875rem;
+  line-height: 0.90625rem;
+  margin-bottom: 1.20833rem;
   -webkit-box-shadow: #265f73 0 0 0.25em inset;
   -moz-box-shadow: #265f73 0 0 0.25em inset;
   box-shadow: #265f73 0 0 0.25em inset;
   overflow: auto;
-  margin-left: -0.89063rem;
-  padding: 0.59375rem;
-  border-left: 0.29688rem solid rgba(0, 38, 50, 0.25);
+  margin-left: -0.90625rem;
+  padding: 0.60417rem;
+  border-left: 0.30208rem solid rgba(0, 38, 50, 0.25);
 }
 
 img {
@@ -273,18 +273,23 @@ img {
 
 tt {
   background: rgba(0, 114, 153, 0.125);
-  padding: 0.29688rem;
-  border: 0.05938rem solid rgba(0, 38, 50, 0.25);
+  padding: 0.30208rem;
+  border: 0.06042rem solid rgba(0, 38, 50, 0.25);
 }
 
 h1 tt {
-  font-size: 0.84375rem;
-  line-height: 1.1875rem;
+  font-size: 0.83333rem;
+  line-height: 1.20833rem;
 }
 
 h2 tt {
   font-size: 0.6875rem;
-  line-height: 1.1875rem;
+  line-height: 1.20833rem;
+}
+
+#license .code {
+  font-size: 0.33333rem;
+  line-height: 0.42292rem;
 }
 
 @font-face {
@@ -311,12 +316,12 @@ h2 tt {
   content: "\e003";
 }
 
-#title h1, #questions h1 {
+#title h1, #title h2, #questions h1, #questions h2 {
   text-align: center;
 }
 
 .vcard {
-  margin-top: 1.1875rem;
+  margin-top: 1.20833rem;
 }
 .vcard .logo {
   width: 31.1828%;
@@ -4894,11 +4899,20 @@ h2 tt {
   animation: fadeInLeft 300ms both;
 }
 
-#thistalk > ul {
-  float: left;
+.step[data-center="1"] {
+  text-align: center;
 }
-#thistalk img {
-  float: right;
+
+.step img:not(.logo) {
+  -webkit-box-shadow: 0 0 0.5em black;
+  -moz-box-shadow: 0 0 0.5em black;
+  box-shadow: 0 0 0.5em black;
+}
+
+#rtd img:nth-of-type(2) {
+  position: absolute;
+  top: -50px;
+  left: 700px;
 }
 
 blockquote {

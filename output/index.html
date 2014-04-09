@@ -1,22 +1,82 @@
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Set your code free: releasing and maintaining a Python project</title><meta name="generator" content="Hovercraft! 1.0 http://regebro.github.com/hovercraft"></meta><meta name="author" content="Carl Meyer"></meta><meta name="description" content="a presentation for PyCon 2014"></meta><meta name="keywords" content="presentation, python, pycon"></meta><link rel="stylesheet" href="css/hovercraft.css" media="all"></link><link rel="stylesheet" href="css/impressConsole.css" media="all"></link><link rel="stylesheet" href="css/highlight.css" media="all"></link><link rel="stylesheet" href="css/oddbird.css" media="all"></link></head><body class="impress-not-supported"><div id="impress" data-transition-duration="400"><div class="step" step="0" id="title" data-x="0" data-y="0"><h1 id="set-your-code-free">set your code free</h1><h2 id="releasing-and-maintaining-a-python-library">releasing and maintaining a Python library</h2><p><div class="vcard">
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Set your code free: releasing and maintaining a Python project</title><meta name="generator" content="Hovercraft! 1.0 http://regebro.github.com/hovercraft"></meta><meta name="author" content="Carl Meyer"></meta><meta name="description" content="a presentation for PyCon 2014"></meta><meta name="keywords" content="presentation, python, pycon"></meta><link rel="stylesheet" href="css/hovercraft.css" media="all"></link><link rel="stylesheet" href="css/impressConsole.css" media="all"></link><link rel="stylesheet" href="css/highlight.css" media="all"></link><link rel="stylesheet" href="css/oddbird.css" media="all"></link></head><body class="impress-not-supported"><div id="impress" data-transition-duration="400"><div class="step" step="0" id="title" data-x="0" data-y="0"><h1 id="set-your-code-free">set your code free</h1><h2 id="releasing-and-maintaining-an-open-source-python-library">releasing and maintaining an open-source Python library</h2><p><div class="vcard">
 <a href="http://www.oddbird.net">
-  <img src="images/logo.svg" alt="OddBird" class="logo" />
+  <img class="logo" src="images/logo.svg" alt="OddBird" class="logo" />
 </a>
-<h2 class="fn">Carl Meyer</h2>
+<h3 class="fn">Carl Meyer</h3>
 <ul class="links">
   <li><a href="http://www.oddbird.net" class="org url">oddbird.net</a></li>
   <li><a href="https://twitter.com/carljm" rel="me">@carljm</a></li>
 </ul>
-</div></p></div><div class="step" step="1" data-reveal="1" data-x="1600" data-y="0"><h1 id="you-have-some-code">you have some code!</h1><ul><li>you want to share it</li><li>much things to do!</li><li>"don't make me think"</li></ul><div class="notes"><p>The "don't make me think" version of how to release and maintain FOSS Python
-code: low on choices, long on opinions.</p><p>Lots of ways to do it; this way works.</p></div></div><div class="step" step="2" data-reveal="1" data-x="3200" data-y="0"><h1 id="all-the-things">all the things</h1><ul><li>project structure</li><li>choosing a license</li><li>code hosting</li><li>documentation</li><li>testing &amp; CI</li><li>packaging</li><li>being a good maintainer</li></ul></div><div class="step" step="3" data-reveal="1" data-x="4800" data-y="0"><h1 id="assumptions">assumptions</h1><ul><li>not huge</li><li>one developer or small team</li><li>target: <tt>pip install</tt></li></ul><div class="notes"><p>If you're releasing OpenStack and/or have a team of four hundred developers,
-things look a bit different. Much more custom needs.</p><p>Depending what you're building, many ways to get your code to users. This
-talk will assume <tt>pip install</tt>; good for libraries or simpler
-applications. Won't be talking about e.g. Windows or OS X installers, Linux
-distro packaging, web application deployment</p></div></div><div class="step" step="4" data-x="6400" data-y="0"><h1 id="structure">structure</h1></div><div class="step" step="5" id="questions" data-x="8000" data-y="0"><h1 id="questions">Questions?</h1><ul><li><a href="http://oddbird.net/set-your-code-free-preso">oddbird.net/set-your-code-free-preso</a></li><li><a href="http://tox.readthedocs.org/en/latest/">tox.readthedocs.org/en/latest/</a></li></ul><p><div class="vcard">
+</div></p></div><div class="step" step="1" data-reveal="1" data-x="1600" data-y="0"><h1 id="you-have-code">You have code!</h1><ul><li>You want me to use it (<tt>pip install</tt>).</li><li>You want me to contribute to it.</li></ul><div class="notes"><ul><li>Target: <tt>pip install</tt></li><li>Not web app deployment, GUI installer, ...</li><li>So you look up the docs on how to do this...</li></ul></div></div><div class="step" step="2" data-center="1" data-x="3200" data-y="0"><img src="images/confused-traffic-sign.jpg" alt="" width="" height="700px"></img><div class="notes"><ul><li>"From zero to awesome in 20 minutes."</li><li>Awesome: auto-updating docs, auto-running tests (including on pull
+requests), <tt>pip install</tt> ready, welcoming to contributors.</li><li>A set of rails.</li><li>Not the only way, but _a_ way that will work.</li><li>Long on opinions, short on choices.</li></ul></div></div><div class="step" step="3" data-reveal="1" data-x="4800" data-y="0"><h1 id="all-the-things">All the things</h1><ol><li>Project structure.</li><li>Choosing a license.</li><li>Code hosting.</li><li>Documentation.</li><li>Testing &amp; CI.</li><li>Packaging.</li><li>Community.</li></ol></div><div class="step" step="4" data-x="6400" data-y="0"><h1 id="pyfly">PyFly</h1></div><div class="step" step="5" data-center="1" data-x="8000" data-y="0"><img src="images/python.png" alt="" width="" height="700px"></img></div><div class="step" step="6" data-emphasize-lines-step="2,3,4,5,6,7,8,9" data-x="9600" data-y="0"><h1 id="structure">01. Structure</h1><pre class="highlight code"><span class="ln"> 1 </span> .
+<span class="ln"> 2 </span> &#x2514;&#x2500;&#x2500; PyFly/
+<span class="ln"> 3 </span>     &#x251C;&#x2500;&#x2500; docs/
+<span class="ln"> 4 </span>     &#x251C;&#x2500;&#x2500; pyfly/
+<span class="ln"> 5 </span>     &#x2502;&#xA0;&#xA0; &#x2514;&#x2500;&#x2500; __init__.py
+<span class="ln"> 6 </span>     &#x251C;&#x2500;&#x2500; tests/
+<span class="ln"> 7 </span>     &#x251C;&#x2500;&#x2500; LICENSE.txt
+<span class="ln"> 8 </span>     &#x251C;&#x2500;&#x2500; README.rst
+<span class="ln"> 9 </span>     &#x2514;&#x2500;&#x2500; setup.py</pre><div class="notes"><p>This is the bare bones; we'll flesh this out and add to it as we go.</p><p>Assume these files are empty for now.</p></div></div><div class="step" step="7" data-reveal="1" data-x="11200" data-y="0"><h1 id="license">02. License</h1><ul><li>The <strong>conditions</strong> for my use.</li><li><strong>No license</strong> means <strong>I can't use it</strong>.</li><li>If you aren't sure, use <a href="http://opensource.org/licenses/BSD-3-Clause">BSD</a> or <a href="http://opensource.org/licenses/MIT">MIT</a>.</li><li>Or (L) <a href="http://opensource.org/licenses/gpl-license">GPL</a>, <a href="http://opensource.org/licenses/Apache-2.0">Apache</a>, <a href="http://opensource.org/licenses/MPL-2.0">MPL</a>.</li><li>Don't use anything else.</li><li>H/t: <a href="https://twitter.com/jacobian">@jacobian</a> 's <a href="http://www.youtube.com/watch?v=vhuF0oalOi8">lightning talk</a>.</li></ul><div class="notes"><p>Recommendation of BSD/MIT assumes that you want as many people as possible
+to be able to use your code without worrying about legal problems, and that
+you would rather have more users and voluntary contributions back than fewer
+users who are legally required to contribute back.</p><p>By choosing some other wacky license (or even worse, writing your own) you
+are contributing to license proliferation, making a complicated situation
+even worse, and giving other people reasons to worry about whether it's safe
+to use your code.</p></div></div><div class="step" step="8" id="license" data-x="12800" data-y="0"><h1 id="license-txt"><tt>LICENSE.txt</tt></h1><pre class="highlight code"><span class="ln"> 1 </span> Copyright (c) 2009-2014, Carl Meyer and contributors
+<span class="ln"> 2 </span> All rights reserved.
+<span class="ln"> 3 </span>
+<span class="ln"> 4 </span> Redistribution and use in source and binary forms, with or without
+<span class="ln"> 5 </span> modification, are permitted provided that the following conditions are
+<span class="ln"> 6 </span> met:
+<span class="ln"> 7 </span>
+<span class="ln"> 8 </span>     * Redistributions of source code must retain the above copyright
+<span class="ln"> 9 </span>       notice, this list of conditions and the following disclaimer.
+<span class="ln">10 </span>     * Redistributions in binary form must reproduce the above
+<span class="ln">11 </span>       copyright notice, this list of conditions and the following
+<span class="ln">12 </span>       disclaimer in the documentation and/or other materials provided
+<span class="ln">13 </span>       with the distribution.
+<span class="ln">14 </span>
+<span class="ln">15 </span> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+<span class="ln">16 </span> "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+<span class="ln">17 </span> LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+<span class="ln">18 </span> A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+<span class="ln">19 </span> OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+<span class="ln">20 </span> SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+<span class="ln">21 </span> LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+<span class="ln">22 </span> DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+<span class="ln">23 </span> THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+<span class="ln">24 </span> (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+<span class="ln">25 </span> OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre></div><div class="step" step="9" data-reveal="1" data-x="14400" data-y="0"><h1 id="code-hosting">03. Code hosting</h1><ul><li><a href="https://github.com/">GitHub</a>.</li><li>That's where the people are.</li></ul></div><div class="step" step="10" data-reveal="1" data-x="16000" data-y="0"><h1 id="docs">04. Docs</h1><ul><li>If it's not documented, it doesn't exist.</li><li>Build it with <a href="http://sphinx-doc.org/">Sphinx</a>.</li><li>Host it at <a href="https://readthedocs.org/">ReadTheDocs</a>.</li></ul><div class="notes"><p>I like reading code. But if I have to read your code to figure out how to
+use your thing -- I'm gonna decide to just write it myself instead.</p><p>Auto-generated API docs don't count.</p><p>How to write docs: another easy choice.</p><p>I spent like a year thinking I should do this, but I thought it would be
+painful.</p><p>It is sooo easy, there is just no excuse not to do it.</p></div></div><div class="step" step="11" data-emphasize-lines-step="1,4,6,10,12" data-x="17600" data-y="0"><pre class="highlight code"><span class="ln"> 1 </span>$ pip install sphinx
+<span class="ln"> 2 </span>...
+<span class="ln"> 3 </span>
+<span class="ln"> 4 </span>$ cd docs/
+<span class="ln"> 5 </span>
+<span class="ln"> 6 </span>$ sphinx-quickstart
+<span class="ln"> 7 </span>...
+<span class="ln"> 8 </span>
+<span class="ln"> 9 </span>Enter the root path for documentation.
+<span class="ln">10 </span>&gt; Root path for the documentation [.]:
+<span class="ln">11 </span>
+<span class="ln">12 </span>...</pre></div><div class="step" step="12" data-emphasize-lines-step="1,2,3,4,5,6,10" data-x="19200" data-y="0"><h1 id="docs-index-rst"><tt>docs/index.rst</tt></h1><pre class="highlight code rst"><span class="ln"> 1 </span><span class="gh">Welcome to PyFly!</span>
+<span class="ln"> 2 </span><span class="gh">=================</span>
+<span class="ln"> 3 </span><span class="gh">Installing</span>
+<span class="ln"> 4 </span><span class="gh">----------</span>
+<span class="ln"> 5 </span>Install <span class="gs">**PyFly**</span> with
+<span class="ln"> 6 </span><span class="s">``pip install PyFly``</span>.
+<span class="ln"> 7 </span>
+<span class="ln"> 8 </span><span class="gh">Usage</span>
+<span class="ln"> 9 </span><span class="gh">-----</span>
+<span class="ln">10 </span><span class="p">..</span> <span class="ow">code</span><span class="p">::</span>
+<span class="ln">11 </span>
+<span class="ln">12 </span>   import pyfly
+<span class="ln">13 </span>   route = pyfly.Route('KRAP', 'CYUL')</pre></div><div class="step" step="13" data-x="20800" data-y="0"><h1 id="make-html"><tt>make html</tt></h1></div><div class="step" step="14" data-center="1" data-fullwidth="1" data-x="22400" data-y="0"><img src="images/docs-local.png" alt="" width="1000px" height=""></img></div><div class="step" step="15" id="rtd" data-fullwidth="1" data-center="1" data-x="24000" data-y="0"><img src="images/rtd-create-header.png" alt="" width="1000px" height=""></img><img src="images/rtd-webhook.png" alt="" width="" height=""></img></div><div class="step" step="16" data-fullwidth="1" data-center="1" data-x="25600" data-y="0"><img src="images/rtd-docs.png" alt="" width="1000px" height=""></img><div class="notes"><ul><li>Automatically updates the docs every time you push to the repo.</li><li>Can build multiple different versions (by branch or tag) and provides a
+version switcher to choose between them.</li><li>Good-looking, mobile-responsive theme.</li></ul></div></div><div class="step" step="17" id="questions" data-x="27200" data-y="0"><h1 id="questions">Questions?</h1><p><a href="http://oddbird.net/set-your-code-free-preso">oddbird.net/set-your-code-free-preso</a></p><p><div class="vcard">
 <a href="http://www.oddbird.net">
-  <img src="images/logo.svg" alt="OddBird" class="logo" />
+  <img class="logo" src="images/logo.svg" alt="OddBird" class="logo" />
 </a>
-<h2 class="fn">Carl Meyer</h2>
+<h3 class="fn">Carl Meyer</h3>
 <ul class="links">
   <li><a href="http://www.oddbird.net" class="org url">oddbird.net</a></li>
   <li><a href="https://twitter.com/carljm" rel="me">@carljm</a></li>
