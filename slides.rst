@@ -302,6 +302,153 @@ PyFly
 
    * Good-looking, mobile-responsive theme.
 
+   * Win!
+
+----
+
+:data-reveal: 1
+
+05. Testing
+-----------
+
+* If it's not tested, it's broken.
+
+.. note::
+
+   Tests are good for any code, but they are critical for open-source code that
+   is getting contributions.
+
+   Finding time to handle pull requests is hard enough, you really don't want
+   to have to run through a bunch of manual tests for every pull request to
+   verify that it didn't break things.
+
+----
+
+:id: matrix
+
+================ === === === === ===
+Versions                Python
+---------------- -------------------
+Django           2.6 2.7 3.2 3.3 3.4
+================ === === === === ===
+**1.4.10**
+**1.5.5**
+**1.6.2**
+**1.7-alpha**
+**master**
+================ === === === === ===
+
+.. note::
+
+   A reasonable support matrix for a popular Django add-on library.
+
+   Could be worse: with another dependency or two it would have 3 or 4
+   dimensions, not just 2.
+
+   25 boxes in that matrix. Are you gonna create 25 virtualenvs and run the
+   tests 25 times for every pull request to your project? If not, your claim to
+   support all those versions is purely theoretical, and almost certainly not
+   true.
+
+   Thankfully, there's a tool to help with this: ...
+
+----
+
+:data-reveal: 1
+
+`tox`_ saves the day
+====================
+
+* Creates a bunch of virtualenvs.
+
+* Runs your tests in each of them.
+
+.. note::
+
+   One command.
+
+----
+
+:data-emphasize-lines-step: 2,5,6
+
+``tox.ini``
+-----------
+
+.. code:: ini
+   :number-lines:
+
+   [tox]
+   envlist = py27,py33
+
+   [testenv]
+   deps = pytest
+   commands = py.test
+
+----
+
+:id: running-tox
+:data-emphasize-lines-step: 1,2,3,4,5,6,11,15,18,19,20
+:data-pytest-highlight: 1
+
+.. code::
+   :number-lines:
+
+   $ tox
+   GLOB sdist-make: /.../PyFly/setup.py
+   py27 create: /.../PyFly/.tox/py27
+   py27 installdeps: pytest
+   py27 inst: /.../PyFly/.tox/dist/PyFly-0.1.zip
+   py27 runtests: commands[0] | py.test
+   ================== test session starts ====================
+   platform linux -- Python 2.7.6 -- py-1.4.20 -- pytest-2.5.2
+   collected 3 items
+
+   test_routes.py ...
+
+   ================== 3 passed in 0.02 seconds ===============
+
+   ... <same for py33>...
+
+   __________________ summary ________________________________
+     py27: commands succeeded
+     py33: commands succeeded
+     congratulations :)
+
+
+----
+
+:id: complex-tox
+:data-emphasize-lines-step: 3,14,15,17,18
+
+.. code:: ini
+   :number-lines:
+
+   [tox]
+   envlist =
+       py26-1.4, py26-1.5, py26-1.6,
+       py27-1.4, py27-1.5, py27-1.6, py27-trunk,
+       py32-1.5, py32-1.6, py32-trunk,
+       py33-1.5, py33-1.6, py33-trunk
+
+   [testenv]
+   deps =
+       South == 0.8.1
+       coverage == 3.6
+   commands = coverage run -a setup.py test
+
+   [testenv:py26-1.4]
+   basepython = python2.6
+   deps =
+       Django == 1.4.10
+       {[base]deps}
+
+   ... <same for each env> ...
+
+.. note::
+
+   Gets a bit verbose with a lot of envs, but still better than doing it
+   manually!
+
 ----
 
 :id: questions
@@ -337,4 +484,4 @@ Questions?
 .. _GitHub: https://github.com/
 .. _Sphinx: http://sphinx-doc.org/
 .. _ReadTheDocs: https://readthedocs.org/
-.. _tox.readthedocs.org/en/latest/: http://tox.readthedocs.org/en/latest/
+.. _tox: http://tox.readthedocs.org/en/latest/

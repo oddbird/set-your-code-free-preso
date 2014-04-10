@@ -287,11 +287,6 @@ h2 tt {
   line-height: 1.20833rem;
 }
 
-#license .code {
-  font-size: 0.33333rem;
-  line-height: 0.42292rem;
-}
-
 @font-face {
   font-family: "IcoMoon";
   src: url('../fonts/oddsite.eot');
@@ -4909,10 +4904,45 @@ h2 tt {
   box-shadow: 0 0 0.5em black;
 }
 
+#license .code {
+  font-size: 0.33333rem;
+  line-height: 0.42292rem;
+}
+
 #rtd img:nth-of-type(2) {
   position: absolute;
   top: -50px;
   left: 700px;
+}
+
+#matrix table {
+  font-size: 0.83333rem;
+  line-height: 1.20833rem;
+  border-collapse: collapse;
+  background-color: #fdf6e3;
+  -webkit-box-shadow: 0 0 0.5em black;
+  -moz-box-shadow: 0 0 0.5em black;
+  box-shadow: 0 0 0.5em black;
+}
+#matrix table tr:nth-of-type(1) th:nth-of-type(1) p {
+  visibility: hidden;
+}
+#matrix table th {
+  font-weight: bold;
+  text-align: center;
+}
+#matrix table td, #matrix table th {
+  padding: 0.25em 0.75em;
+  border: thin solid black;
+}
+#matrix table td p, #matrix table th p {
+  padding: 0;
+  margin: 0;
+}
+
+#running-tox .code, #complex-tox .code {
+  font-size: 0.4375rem;
+  line-height: 0.54375rem;
 }
 
 blockquote {

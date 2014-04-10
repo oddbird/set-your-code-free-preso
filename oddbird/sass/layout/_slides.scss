@@ -76,8 +76,40 @@
     @include box-shadow(0 0 .5em black);
 }
 
+#license .code {
+  @include adjust-font-size-to(ms(-8),.35);
+}
+
 #rtd img:nth-of-type(2) {
     position: absolute;
     top: -50px;
     left: 700px;
+}
+
+#matrix {
+    table {
+        @include adjust-font-size-to($smallpx);
+        border-collapse: collapse;
+        background-color: #fdf6e3;
+        @include box-shadow(0 0 .5em black);
+        tr:nth-of-type(1) th:nth-of-type(1) p {
+            visibility: hidden;
+        }
+        th {
+            font-weight: bold;
+            text-align: center;
+        }
+        td, th {
+            p {
+                padding: 0;
+                margin: 0;
+            }
+            padding: .25em .75em;
+            border: thin solid black;
+        }
+    }
+}
+
+#running-tox .code, #complex-tox .code {
+    @include adjust-font-size-to(ms(-6),.45);
 }

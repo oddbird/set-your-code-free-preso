@@ -93,8 +93,3 @@ h1 tt {
 h2 tt {
   @include adjust-font-size-to($xsmallpx,1);
 }
-
-
-#license .code {
-  @include adjust-font-size-to(ms(-8),.35);
-}
