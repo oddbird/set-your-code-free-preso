@@ -8,8 +8,9 @@
     elem.classList.add('innerStep');
   });
 
-  // second image on #rtd is an innerStep
+  // second image on some slides is an innerStep
   $('#rtd img').eq(1).addClass('innerStep');
+  $('#travis-results img').eq(1).addClass('innerStep');
 
 })(document, window);
 

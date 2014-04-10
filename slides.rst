@@ -89,8 +89,8 @@ PyFly
 
 :data-emphasize-lines-step: 2,3,4,5,6,7,8,9
 
-**01.** Structure
------------------
+*01.* Structure
+---------------
 
 .. code::
    :number-lines:
@@ -115,8 +115,8 @@ PyFly
 
 :data-reveal: 1
 
-**02.** License
----------------
+*02.* License
+-------------
 
 * The **conditions** for my use.
 
@@ -182,8 +182,8 @@ PyFly
 
 :data-reveal: 1
 
-**03.** Code hosting
---------------------
+*03.* Code hosting
+------------------
 
 * `GitHub`_.
 
@@ -193,8 +193,8 @@ PyFly
 
 :data-reveal: 1
 
-**04.** Docs
-------------
+*04.* Docs
+----------
 
 * If it's not documented, it doesn't exist.
 
@@ -308,8 +308,8 @@ PyFly
 
 :data-reveal: 1
 
-**05.** Testing
----------------
+*05.* Testing
+-------------
 
 * If it's not tested, it's broken.
 
@@ -391,6 +391,7 @@ Django           2.6 2.7 3.2 3.3 3.4
 ----
 
 :id: running-tox
+:data-small-code: 1
 :data-emphasize-lines-step: 1,2,3,4,5,6,11,15,18,19,20
 :data-pytest-highlight: 1
 
@@ -422,6 +423,7 @@ Django           2.6 2.7 3.2 3.3 3.4
 ----
 
 :id: complex-tox
+:data-small-code: 1
 :data-emphasize-lines-step: 3,14,15,17,18
 
 .. code:: ini
@@ -429,7 +431,6 @@ Django           2.6 2.7 3.2 3.3 3.4
 
    [tox]
    envlist =
-       py26-1.4, py26-1.5, py26-1.6,
        py27-1.4, py27-1.5, py27-1.6, py27-trunk,
        py32-1.5, py32-1.6, py32-trunk,
        py33-1.5, py33-1.6, py33-trunk
@@ -440,8 +441,8 @@ Django           2.6 2.7 3.2 3.3 3.4
        coverage == 3.6
    commands = coverage run -a setup.py test
 
-   [testenv:py26-1.4]
-   basepython = python2.6
+   [testenv:py27-1.4]
+   basepython = python2.7
    deps =
        Django == 1.4.10
        {[base]deps}
@@ -465,6 +466,311 @@ Django           2.6 2.7 3.2 3.3 3.4
 
 all the time
 ============
+
+.. note::
+
+   You get a pull request, you open a terminal, you add the source of the PR as
+   a remote, you pull their branch, you run tox... wouldn't it be nice if when
+   you first looked at the pull request, it already told you whether the tests
+   passed or not?
+
+   This used to be hard. Today it is easy.
+
+----
+
+travis-ci.org
+-------------
+
+.. note::
+
+   Will do this for free for public GitHub projects.
+
+   (There's also drone.io and probably others; Travis is the one I've used.)
+
+----
+
+:data-fullwidth: 1
+:data-center: 1
+
+.. image:: images/travis-select.png
+   :width: 1000px
+
+----
+
+:data-emphasize-lines-step: 1,3,7
+
+``.travis.yml``
+---------------
+
+.. code:: yaml
+   :number-lines:
+
+    language: python
+
+    python:
+      - 3.2
+      - 3.3
+      - 3.4
+
+    script:
+      - py.test
+
+----
+
+:id: travis-complex
+:data-small-code: 1
+:data-emphasize-lines-step: 7,11,15,16,18,23
+
+.. code:: yaml
+   :number-lines:
+
+    language: python
+    python:
+      - 2.7
+      - 3.3
+      - 3.4
+    env:
+      - DJANGO=Django==1.4.10
+      - DJANGO=Django==1.5.5
+      - DJANGO=Django==1.6.1
+    install:
+      - pip install $DJANGO
+      - pip install coverage coveralls
+    script:
+      - coverage run -a setup.py test
+      - coverage report
+    matrix:
+      exclude:
+       - python: 3.3
+         env: DJANGO=Django==1.4.10
+       - python: 3.4
+         env: DJANGO=Django==1.4.10
+    after_success: coveralls
+
+.. note::
+
+   Can also reuse your tox environments in .travis.yml via TOXENV. Or translate
+   tox.ini to .travis.yml and vice versa using panci.
+
+   I just maintain them both manually, they don't change that often.
+
+----
+
+:id: travis-results
+:data-reveal: 1
+:data-fullwidth: 1
+:data-center: 1
+
+.. image:: images/travis-results.png
+   :height: 750px
+
+.. image:: images/travis-github.png
+
+----
+
+what else...
+------------
+
+.. note::
+
+   Oh yes, you may want people to be able to install your thing!
+
+----
+
+*06.* Packaging
+---------------
+
+----
+
+``setup.py``
+------------
+
+----
+
+:id: setup-py
+:data-small-code: 1
+:data-emphasize-lines-step: 1,3,4,6,7,8,9,10,11,12,13,14,15,16
+
+.. code:: python
+   :number-lines:
+
+    from setuptools import setup
+
+    with open('README.rst') as fh:
+        long_description = fh.read()
+
+    setup(
+        name='PyFly',
+        version='0.1.2',
+        description='Flying with Python',
+        long_description=long_description,
+        author='Carl Meyer',
+        author_email='carl@oddbird.net',
+        url='https://github.com/oddbird/PyFly/',
+        packages=['pyfly'],
+        install_requires=['six'],
+        classifiers=[
+            'Development Status :: 3 - Alpha',
+            'License :: OSI Approved :: BSD License',
+            'Programming Language :: Python',
+            'Programming Language :: Python :: 2.7',
+            'Programming Language :: Python :: 3',
+            'Programming Language :: Python :: 3.3',
+            'Programming Language :: Python :: 3.4',
+        ],
+    )
+
+----
+
+:data-reveal: 1
+
+* ``python setup.py sdist``
+
+* ``pip install dist/PyFly-0.1.2.tar.gz``
+
+* ``python setup.py register sdist upload``
+
+* ``pip install PyFly``
+
+* Win!
+
+----
+
+:id: pug
+:data-reveal: 1
+
+For more
+========
+
+* `Python Packaging User Guide`_
+
+* `python-packaging-user-guide.readthedocs.org`_
+
+----
+
+*07.* Community
+---------------
+
+.. note::
+
+   Ways you can create a happier experience for people using and contributing
+   to your software.
+
+----
+
+:id: semver
+:data-reveal: 1
+
+Semantic Versioning
+-------------------
+
+* X.Y.Z
+
+* increment:
+
+* *X* for breaking changes.
+
+* *Y* for backwards-compatible feature additions.
+
+* *Z* for bug fixes.
+
+* `semver.org`_
+
+----
+
+Keep a *changelog*
+==================
+
+----
+
+:id: changes
+:data-small-code: 1
+
+``CHANGES.rst``
+===============
+
+.. code:: rst
+
+    CHANGES
+    =======
+
+    master (unreleased)
+    -------------------
+
+    2.0.3 (2014.03.19)
+    -------------------
+
+    * Fix ``get_query_set`` vs ``get_queryset``
+      in ``PassThroughManager`` for Django <1.6.
+      Thanks whop, Bojan Mihelac, Daniel Shapiro,
+      and Matthew Schinckel for the report;
+      Matthew for the fix. Merge of GH-121.
+
+    * Fix ``FieldTracker`` with deferred model
+      attributes. Thanks Michael van Tellingen.
+      Merge of GH-115.
+
+.. note::
+
+   Changes relevant to users.
+
+   NOT the same as a git commit log.
+
+----
+
+Have a *CONTRIBUTING* document
+------------------------------
+
+----
+
+:id: contributing
+:data-reveal: 1
+
+``CONTRIBUTING.rst``
+====================
+
+* How to get set up for development.
+
+* How to run the tests.
+
+* What to include in a bug report.
+
+* Coding standards, test coverage standards...
+
+* |github-contrib|
+
+.. |github-contrib| image:: images/github-contributing.png
+                    :width: 800px
+
+----
+
+:data-center: 1
+
+Keep the
+========
+
+*tests passing*
+===============
+
+----
+
+:data-center: 1
+
+Give
+====
+
+*quick feedback*
+================
+
+----
+
+Give *credit*
+=============
+
+----
+
+Be *nice*
+=========
 
 ----
 
@@ -502,3 +808,6 @@ Questions?
 .. _Sphinx: http://sphinx-doc.org/
 .. _ReadTheDocs: https://readthedocs.org/
 .. _tox: http://tox.readthedocs.org/en/latest/
+.. _semver.org: http://semver.org
+.. _Python Packaging User Guide: http://python-packaging-user-guide.readthedocs.org/en/latest/
+.. _python-packaging-user-guide.readthedocs.org: http://python-packaging-user-guide.readthedocs.org/en/latest/

@@ -76,10 +76,6 @@
     @include box-shadow(0 0 .5em black);
 }
 
-.step h1 strong {
-    color: $accent;
-}
-
 #license .code {
   @include adjust-font-size-to(ms(-8),.35);
 }
@@ -120,7 +116,7 @@
     }
 }
 
-#running-tox .code, #complex-tox .code {
+.step[data-small-code="1"] .code {
     @include adjust-font-size-to(ms(-6),.45);
 }
 
@@ -131,4 +127,19 @@
     h1:nth-of-type(2) {
         @include adjust-font-size-to(ms(7));
     }
+}
+
+#travis-results img:nth-of-type(2) {
+    position: absolute;
+    width: 1000px;
+    top: 200px;
+    left: 12px;
+}
+
+#semver h1 {
+    @include adjust-font-size-to($xlargepx);
+}
+
+#pug li:nth-of-type(2) {
+    @include adjust-font-size-to($smallpx);
 }

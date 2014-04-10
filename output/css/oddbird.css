@@ -4909,10 +4909,6 @@ em {
   box-shadow: 0 0 0.5em black;
 }
 
-.step h1 strong {
-  color: #cc0066;
-}
-
 #license .code {
   font-size: 0.33333rem;
   line-height: 0.42292rem;
@@ -4955,7 +4951,7 @@ em {
   margin: 0;
 }
 
-#running-tox .code, #complex-tox .code {
+.step[data-small-code="1"] .code {
   font-size: 0.4375rem;
   line-height: 0.54375rem;
 }
@@ -4967,6 +4963,23 @@ em {
 #all-the-time h1:nth-of-type(2) {
   font-size: 2.47917rem;
   line-height: 3.02083rem;
+}
+
+#travis-results img:nth-of-type(2) {
+  position: absolute;
+  width: 1000px;
+  top: 200px;
+  left: 12px;
+}
+
+#semver h1 {
+  font-size: 1.5rem;
+  line-height: 1.8125rem;
+}
+
+#pug li:nth-of-type(2) {
+  font-size: 0.83333rem;
+  line-height: 1.20833rem;
 }
 
 blockquote {
