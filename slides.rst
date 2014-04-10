@@ -424,7 +424,7 @@ Django           2.6 2.7 3.2 3.3 3.4
 
 :id: complex-tox
 :data-small-code: 1
-:data-emphasize-lines-step: 3,14,15,17,18
+:data-emphasize-lines-step: 3,13,14,16,17
 
 .. code:: ini
    :number-lines:
@@ -497,7 +497,7 @@ travis-ci.org
 
 ----
 
-:data-emphasize-lines-step: 1,3,7
+:data-emphasize-lines-step: 1,3,8
 
 ``.travis.yml``
 ---------------
@@ -519,7 +519,7 @@ travis-ci.org
 
 :id: travis-complex
 :data-small-code: 1
-:data-emphasize-lines-step: 7,11,15,16,18,23
+:data-emphasize-lines-step: 6,10,14,15,17,22
 
 .. code:: yaml
    :number-lines:

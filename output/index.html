@@ -103,7 +103,7 @@ true.</p><p>Thankfully, there's a tool to help with this: ...</p></div></div><di
 <span class="ln">17 </span>__________________ summary ________________________________
 <span class="ln">18 </span>  py27: commands succeeded
 <span class="ln">19 </span>  py33: commands succeeded
-<span class="ln">20 </span>  congratulations :)</pre></div><div class="step" step="22" id="complex-tox" data-small-code="1" data-emphasize-lines-step="3,14,15,17,18" data-x="35200" data-y="0"><pre class="highlight code ini"><span class="ln"> 1 </span><span class="k">[tox]</span>
+<span class="ln">20 </span>  congratulations :)</pre></div><div class="step" step="22" id="complex-tox" data-small-code="1" data-emphasize-lines-step="3,13,14,16,17" data-x="35200" data-y="0"><pre class="highlight code ini"><span class="ln"> 1 </span><span class="k">[tox]</span>
 <span class="ln"> 2 </span><span class="na">envlist</span> <span class="o">=</span><span class="s">
 </span><span class="ln"> 3 </span><span class="s">    py27-1.4, py27-1.5, py27-1.6, py27-trunk,
 </span><span class="ln"> 4 </span><span class="s">    py32-1.5, py32-1.6, py32-trunk,
@@ -125,7 +125,7 @@ true.</p><p>Thankfully, there's a tool to help with this: ...</p></div></div><di
 manually!</p></div></div><div class="step" step="23" id="all-the-time" data-center="1" data-x="36800" data-y="0"><h1 id="running-your-tests"><em>Running your tests</em></h1><h1 id="all-the-time">all the time</h1><div class="notes"><p>You get a pull request, you open a terminal, you add the source of the PR as
 a remote, you pull their branch, you run tox... wouldn't it be nice if when
 you first looked at the pull request, it already told you whether the tests
-passed or not?</p><p>This used to be hard. Today it is easy.</p></div></div><div class="step" step="24" data-x="38400" data-y="0"><h1 id="travis-ci-org">travis-ci.org</h1><div class="notes"><p>Will do this for free for public GitHub projects.</p><p>(There's also drone.io and probably others; Travis is the one I've used.)</p></div></div><div class="step" step="25" data-fullwidth="1" data-center="1" data-x="40000" data-y="0"><img src="images/travis-select.png" alt="" width="1000px" height=""></img></div><div class="step" step="26" data-emphasize-lines-step="1,3,7" data-x="41600" data-y="0"><h1 id="travis-yml"><tt>.travis.yml</tt></h1><pre class="highlight code yaml"><span class="ln"> 1 </span> <span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">python</span>
+passed or not?</p><p>This used to be hard. Today it is easy.</p></div></div><div class="step" step="24" data-x="38400" data-y="0"><h1 id="travis-ci-org">travis-ci.org</h1><div class="notes"><p>Will do this for free for public GitHub projects.</p><p>(There's also drone.io and probably others; Travis is the one I've used.)</p></div></div><div class="step" step="25" data-fullwidth="1" data-center="1" data-x="40000" data-y="0"><img src="images/travis-select.png" alt="" width="1000px" height=""></img></div><div class="step" step="26" data-emphasize-lines-step="1,3,8" data-x="41600" data-y="0"><h1 id="travis-yml"><tt>.travis.yml</tt></h1><pre class="highlight code yaml"><span class="ln"> 1 </span> <span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">python</span>
 <span class="ln"> 2 </span>
 <span class="ln"> 3 </span> <span class="l-Scalar-Plain">python</span><span class="p-Indicator">:</span>
 <span class="ln"> 4 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">3.2</span>
@@ -133,7 +133,7 @@ passed or not?</p><p>This used to be hard. Today it is easy.</p></div></div><div
 <span class="ln"> 6 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">3.4</span>
 <span class="ln"> 7 </span>
 <span class="ln"> 8 </span> <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span>
-<span class="ln"> 9 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">py.test</span></pre></div><div class="step" step="27" id="travis-complex" data-small-code="1" data-emphasize-lines-step="7,11,15,16,18,23" data-x="43200" data-y="0"><pre class="highlight code yaml"><span class="ln"> 1 </span> <span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">python</span>
+<span class="ln"> 9 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">py.test</span></pre></div><div class="step" step="27" id="travis-complex" data-small-code="1" data-emphasize-lines-step="6,10,14,15,17,22" data-x="43200" data-y="0"><pre class="highlight code yaml"><span class="ln"> 1 </span> <span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">python</span>
 <span class="ln"> 2 </span> <span class="l-Scalar-Plain">python</span><span class="p-Indicator">:</span>
 <span class="ln"> 3 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">2.7</span>
 <span class="ln"> 4 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">3.3</span>
