@@ -287,6 +287,11 @@ h2 tt {
   line-height: 1.20833rem;
 }
 
+em {
+  font-style: normal;
+  color: #cc0066;
+}
+
 @font-face {
   font-family: "IcoMoon";
   src: url('../fonts/oddsite.eot');
@@ -4904,6 +4909,10 @@ h2 tt {
   box-shadow: 0 0 0.5em black;
 }
 
+.step h1 strong {
+  color: #cc0066;
+}
+
 #license .code {
   font-size: 0.33333rem;
   line-height: 0.42292rem;
@@ -4927,6 +4936,12 @@ h2 tt {
 #matrix table tr:nth-of-type(1) th:nth-of-type(1) p {
   visibility: hidden;
 }
+#matrix table tr:nth-of-type(1) th:nth-of-type(2) p {
+  color: #cc0066;
+}
+#matrix table tr:nth-of-type(2) th:nth-of-type(1) p {
+  color: #cc0066;
+}
 #matrix table th {
   font-weight: bold;
   text-align: center;
@@ -4943,6 +4958,15 @@ h2 tt {
 #running-tox .code, #complex-tox .code {
   font-size: 0.4375rem;
   line-height: 0.54375rem;
+}
+
+#all-the-time h1:nth-of-type(1) {
+  font-size: 1.5rem;
+  line-height: 1.8125rem;
+}
+#all-the-time h1:nth-of-type(2) {
+  font-size: 2.47917rem;
+  line-height: 3.02083rem;
 }
 
 blockquote {

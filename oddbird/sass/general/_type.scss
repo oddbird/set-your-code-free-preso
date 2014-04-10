@@ -93,3 +93,8 @@ h1 tt {
 h2 tt {
   @include adjust-font-size-to($xsmallpx,1);
 }
+
+em {
+   font-style: normal;
+   color: $accent;
+}

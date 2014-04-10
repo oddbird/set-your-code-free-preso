@@ -76,6 +76,10 @@
     @include box-shadow(0 0 .5em black);
 }
 
+.step h1 strong {
+    color: $accent;
+}
+
 #license .code {
   @include adjust-font-size-to(ms(-8),.35);
 }
@@ -95,6 +99,12 @@
         tr:nth-of-type(1) th:nth-of-type(1) p {
             visibility: hidden;
         }
+        tr:nth-of-type(1) th:nth-of-type(2) p {
+            color: $accent;
+        }
+        tr:nth-of-type(2) th:nth-of-type(1) p {
+            color: $accent;
+        }
         th {
             font-weight: bold;
             text-align: center;
@@ -112,4 +122,13 @@
 
 #running-tox .code, #complex-tox .code {
     @include adjust-font-size-to(ms(-6),.45);
+}
+
+#all-the-time {
+    h1:nth-of-type(1) {
+        @include adjust-font-size-to($xlargepx);
+    }
+    h1:nth-of-type(2) {
+        @include adjust-font-size-to(ms(7));
+    }
 }

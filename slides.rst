@@ -23,12 +23,12 @@ releasing and maintaining an open-source Python library
 
 :data-reveal: 1
 
-You have code!
---------------
+You have *code!*
+----------------
 
-* You want me to use it (``pip install``).
+* You want me to *use* it (``pip install``).
 
-* You want me to contribute to it.
+* You want me to *contribute* to it.
 
 .. note::
 
@@ -89,8 +89,8 @@ PyFly
 
 :data-emphasize-lines-step: 2,3,4,5,6,7,8,9
 
-01. Structure
--------------
+**01.** Structure
+-----------------
 
 .. code::
    :number-lines:
@@ -115,8 +115,8 @@ PyFly
 
 :data-reveal: 1
 
-02. License
------------
+**02.** License
+---------------
 
 * The **conditions** for my use.
 
@@ -182,8 +182,8 @@ PyFly
 
 :data-reveal: 1
 
-03. Code hosting
-----------------
+**03.** Code hosting
+--------------------
 
 * `GitHub`_.
 
@@ -193,8 +193,8 @@ PyFly
 
 :data-reveal: 1
 
-04. Docs
---------
+**04.** Docs
+------------
 
 * If it's not documented, it doesn't exist.
 
@@ -308,8 +308,8 @@ PyFly
 
 :data-reveal: 1
 
-05. Testing
------------
+**05.** Testing
+---------------
 
 * If it's not tested, it's broken.
 
@@ -384,6 +384,10 @@ Django           2.6 2.7 3.2 3.3 3.4
    deps = pytest
    commands = py.test
 
+.. note::
+
+   A very simple tox setup.
+
 ----
 
 :id: running-tox
@@ -446,8 +450,21 @@ Django           2.6 2.7 3.2 3.3 3.4
 
 .. note::
 
-   Gets a bit verbose with a lot of envs, but still better than doing it
+   A more complex example.
+
+   Gets a bit verbose with a lot of envs, but still loads better than doing it
    manually!
+
+----
+
+:id: all-the-time
+:data-center: 1
+
+*Running your tests*
+====================
+
+all the time
+============
 
 ----
 
