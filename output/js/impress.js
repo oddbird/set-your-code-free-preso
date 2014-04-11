@@ -561,13 +561,21 @@
                 stepped_back = true;
             });
             
-            if (!stepped_back) { return goto(prev); }
+            if (stepped_back) {
+                triggerEvent(activeStep, "impress:innerclear");
+            } else {
+                return goto(prev);
+            }
         };
         
         var inner = {
             next: function () {
+                $$('.innerStep.last', activeStep).forEach(function (el) {
+                    el.classList.remove('last');
+                });
                 var innerNext = activeStep.querySelector('.innerStep:not(.stepped)');
                 innerNext.classList.add('stepped');
+                innerNext.classList.add('last');
             }
         };
         

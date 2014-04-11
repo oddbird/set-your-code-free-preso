@@ -112,7 +112,21 @@
                 var slideView = consoleWindow.document.getElementById('slideView');
                 var activeStep = slideView.contentDocument.querySelector('.active');
                 var innerNext = activeStep.querySelector('.innerStep:not(.stepped)');
+                [].slice.call(activeStep.querySelectorAll('.innerStep.last')).forEach(function (el) {
+                    el.classList.remove('last');
+                });
                 innerNext.classList.add('stepped');
+                innerNext.classList.add('last');
+            }
+        };
+
+        var onInnerClear = function () {
+            if (consoleWindow) {
+                var slideView = consoleWindow.document.getElementById('slideView');
+                var activeStep = slideView.contentDocument.querySelector('.active');
+                [].slice.call(activeStep.querySelectorAll('.innerStep.stepped')).forEach(function (el) {
+                    el.classList.remove('stepped');
+                });
             }
         };
 
@@ -270,6 +284,7 @@
             root.addEventListener('impress:stepleave', onStepLeave);
             root.addEventListener('impress:stepenter', onStepEnter);
             root.addEventListener('impress:innerstep', onInnerStep);
+            root.addEventListener('impress:innerclear', onInnerClear);
             
             //When the window closes, clean up after ourselves.
             window.onunload = function(){
