@@ -556,17 +556,12 @@ travis-ci.org
 
 ----
 
-what else...
-------------
+*06.* Packaging
+---------------
 
 .. note::
 
    Oh yes, you may want people to be able to install your thing!
-
-----
-
-*06.* Packaging
----------------
 
 ----
 
