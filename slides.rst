@@ -75,18 +75,6 @@ All the things
 
 ----
 
-PyFly
------
-
-----
-
-:data-center: 1
-
-.. image:: images/python.png
-   :height: 700px
-
-----
-
 :data-emphasize-lines-step: 2,3,4,5,6,7,8,9
 
 *01.* Structure
