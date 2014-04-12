@@ -827,6 +827,16 @@ Give
 Give *credit*
 =============
 
+.. note::
+
+   * When people pitch in, give them props!
+   * In the commit message, in the changelog, in an ``AUTHORS`` file...
+   * Motivates people to contribute.
+   * Give commit access to helpful contributors!
+   * Not as technically important with DVCS as it used to be, but a mark of
+     confidence, will motivate greater involvement (and saves you work).
+   * Someday you'll want to hand off maintenance...
+
 ----
 
 Be *nice*
