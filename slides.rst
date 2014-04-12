@@ -704,7 +704,7 @@ For more
 
 * `Python Packaging User Guide`_
 
-* `python-packaging-user-guide.readthedocs.org`_
+* `packaging.python.org`_
 
 ----
 
@@ -869,5 +869,5 @@ Questions?
 .. _ReadTheDocs: https://readthedocs.org/
 .. _tox: http://tox.readthedocs.org/en/latest/
 .. _semver.org: http://semver.org
-.. _Python Packaging User Guide: http://python-packaging-user-guide.readthedocs.org/en/latest/
-.. _python-packaging-user-guide.readthedocs.org: http://python-packaging-user-guide.readthedocs.org/en/latest/
+.. _Python Packaging User Guide: http://packaging.python.org/
+.. _packaging.python.org: http://packaging.python.org/
