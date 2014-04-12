@@ -19,6 +19,14 @@ releasing and maintaining an open-source Python library
 
 |hcard|
 
+.. note::
+
+   * Hi! Welcome to the final talks session of PyCon
+   * I know it's been a long conference
+   * I'll at least keep this short
+   * If I'm lucky also keep you awake
+   * and send you off on a high note, inspired to release your own software!
+
 ----
 
 :data-reveal: 1
@@ -32,8 +40,14 @@ You have *code!*
 
 .. note::
 
-   * Target: ``pip install``
-   * Not web app deployment, GUI installer, ...
+   * The premise of this talk is that you have some code.
+   * Writing that code is out of scope.
+   * --
+   * ``pip install``
+   * not web app deployment or GUI installer
+   * --
+   * "accept my contributions without breaking your software or losing your
+     sanity"
    * So you look up the docs on how to do this...
 
 ----
@@ -45,12 +59,21 @@ You have *code!*
 
 .. note::
 
-   * "From zero to awesome in 20 minutes."
-   * Awesome: auto-updating docs, auto-running tests (including on pull
-     requests), ``pip install`` ready, welcoming to contributors.
-   * A set of rails.
-   * Not the only way, but _a_ way that will work.
+   * ...and you find lots of different projects
+   * all with their own documentation to read
+   * When you're doing something for the first time, choices kill.
+   * This talk presents a set of rails for setting up your first open-source
+     project..
+   * It's not the only way, but _a_ way that will work.
    * Long on opinions, short on choices.
+   * "From zero to awesome in 20 minutes."
+   * The awesome:
+   * public HTML docs with built-in navigation that update when you push
+   * tests that run on every push (and on pull requests)
+   * ``pip install`` ready
+   * welcoming to contributors.
+   * If you've done this before, hopefully you'll still pick up a new trick or
+     two.
 
 ----
 
@@ -72,6 +95,10 @@ All the things
 #. Packaging.
 
 #. Community.
+
+.. note::
+
+   The roadmap for this talk.
 
 ----
 
@@ -95,9 +122,8 @@ All the things
 
 .. note::
 
-   This is the bare bones; we'll flesh this out and add to it as we go.
-
-   Assume these files are empty for now.
+   * This is the bare bones
+   * We'll flesh this out and add to it as we go.
 
 ----
 
@@ -120,15 +146,25 @@ All the things
 
 .. note::
 
-   Recommendation of BSD/MIT assumes that you want as many people as possible
-   to be able to use your code without worrying about legal problems, and that
-   you would rather have more users and voluntary contributions back than fewer
-   users who are legally required to contribute back.
-
-   By choosing some other wacky license (or even worse, writing your own) you
-   are contributing to license proliferation, making a complicated situation
-   even worse, and giving other people reasons to worry about whether it's safe
-   to use your code.
+   * First decision: releasing software as open source means choosing a
+     license.
+   * I am not a lawyer, this is not legal advice.
+   * --
+   * Your license is the conditions under which I can use your code.
+   * --
+   * If you don't have a license, the default is "all rights reserved."
+   * A project without a license is not open-source, even if its on GitHub!
+   * --
+   * BSD or MIT are unrestrictive licenses;
+   * All you ask from your users is that they credit you: keep your name and
+     the license attached to your work.
+   * --
+   * GPL is more restrictive; requires that any work derived from yours must
+     also be released as GPL. If you're worried about freeloaders, you can go
+     this route, at the cost of having fewer users.
+   * Apache and MPL are reasonable choices if you know why you're choosing
+     them.
+   * --
 
 ----
 
@@ -177,6 +213,12 @@ All the things
 
 * That's where the people are.
 
+.. note::
+
+   * We have a lot of areas to cover,
+   * --
+   * so fortunately some are short and sweet.
+
 ----
 
 :data-reveal: 1
@@ -192,17 +234,20 @@ All the things
 
 .. note::
 
-   I like reading code. But if I have to read your code to figure out how to
-   use your thing -- I'm gonna decide to just write it myself instead.
-
-   Auto-generated API docs don't count.
-
-   How to write docs: another easy choice.
-
-   I spent like a year thinking I should do this, but I thought it would be
-   painful.
-
-   It is sooo easy, there is just no excuse not to do it.
+   * --
+   * I like reading code. I will read code to find a bug, to fix a bug, or to
+     better understand how your library does what it does.
+   * But if I have to read your code to figure out how to use your thing -- I'm
+     gonna choose a different library, or just write it myself instead.
+   * Auto-generated API docs don't count, unless your API is very simple. A
+     long list of functions and classes with their docstrings is something I
+     can get from reading your code.
+   * How to write your docs: fortunately another easy choice.
+   * --
+   * And so is where to host it.
+   * The combination of Sphinx and Read The Docs makes it so ridiculously easy
+     to put beautiful, usable docs online, it's a shame not to take advantage
+     of that by writing some!
 
 ----
 
@@ -223,6 +268,19 @@ All the things
    > Root path for the documentation [.]:
 
    ...
+
+.. note::
+
+   * You can write some sphinx docs in about as much time as I'll spend on the
+     next two slides.
+   * --
+   * pip install sphinx
+   * --
+   * switch to the docs directory
+   * --
+   * run 'sphinx-quickstart'
+   * --
+   * answer some questions; the defaults will do
 
 ----
 
@@ -248,10 +306,29 @@ All the things
       import pyfly
       route = pyfly.Route('KRAP', 'CYUL')
 
+* If you haven't written restructuredtext, the basics are very easy.
+* --
+* underlined headers
+* --
+* different levels of headers
+* --
+* inline formatting: strong with double asterisk
+* --
+* inline code literals
+* --
+* code blocks, automatically syntax highlighted in pretty much any language
+* If you take five minutes and write exactly this much documentation -- a
+  simple usage example -- you've already made your package much more attractive
+  than one without docs.
+
 ----
 
 ``make html``
 -------------
+
+.. note::
+
+   * Run 'make html' to generate an HTML version of your docs
 
 ----
 
