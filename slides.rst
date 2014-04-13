@@ -102,7 +102,7 @@ All the things
 
 ----
 
-:data-emphasize-lines-step: 2,3,4,5,6,7,8,9
+:data-emphasize-lines-step: 2,3,4,5,6,7,8,9,10
 
 *01.* Structure
 ---------------
@@ -117,12 +117,13 @@ All the things
         │   └── __init__.py
         ├── tests/
         ├── LICENSE.txt
+        ├── MANIFEST.in
         ├── README.rst
         └── setup.py
 
 .. note::
 
-   * This is the bare bones
+   * This is the bare bones;
    * We'll flesh this out and add to it as we go.
 
 ----
@@ -301,7 +302,7 @@ All the things
 
    Usage
    -----
-   .. code::
+   Find a route::
 
       import pyfly
       route = pyfly.Route('KRAP', 'CYUL')
@@ -320,8 +321,8 @@ All the things
     * --
     * code blocks, automatically syntax highlighted in pretty much any language
     * If you take five minutes and write exactly this much documentation -- a
-      simple usage example -- you've already made your package much more attractive
-      than one without docs.
+      simple usage example -- you've already made your package much more
+      attractive than one without docs.
 
 ----
 
@@ -382,28 +383,30 @@ All the things
 
 .. note::
 
-   Tests are good for any code, but they are critical for open-source code that
-   is getting contributions.
+   * If code is changing over time, and you don't have automated tests for it
+     (or a lot of time on your hands for testing manually), over time the
+     likelihood of that code being broken approaches 1.
 
-   Finding time to handle pull requests is hard enough, you really don't want
-   to have to run through a bunch of manual tests for every pull request to
-   verify that it didn't break things.
+   * Tests are good for any code, but they are critical for open-source code
+     that is getting contributions. Finding time to handle pull requests is
+     hard enough, you really don't want to have to run through a bunch of
+     manual tests for every pull request to verify that it didn't break things.
 
 ----
 
 :id: matrix
 
-================ === === === === ===
+================ ==== === === === ===
 Versions                Python
----------------- -------------------
-Django           2.6 2.7 3.2 3.3 3.4
-================ === === === === ===
+---------------- --------------------
+Django           pypy 2.7 3.2 3.3 3.4
+================ ==== === === === ===
 **1.4.10**
 **1.5.5**
 **1.6.2**
 **1.7-alpha**
 **master**
-================ === === === === ===
+================ ==== === === === ===
 
 .. note::
 
@@ -432,7 +435,9 @@ Django           2.6 2.7 3.2 3.3 3.4
 
 .. note::
 
-   One command.
+   * With one command...
+   * --
+   * ...
 
 ----
 
@@ -445,7 +450,7 @@ Django           2.6 2.7 3.2 3.3 3.4
    :number-lines:
 
    [tox]
-   envlist = py27,py33
+   envlist = py27,py34,pypy
 
    [testenv]
    deps = pytest
@@ -453,7 +458,14 @@ Django           2.6 2.7 3.2 3.3 3.4
 
 .. note::
 
-   A very simple tox setup.
+   * A very simple tox setup: just three Python versions, no dependencies.
+   * Originally I had just 2.7 and 3.4, but I made the mistake of letting Alex
+     Gaynor see my slides, and he tied me up and wouldn't let me go until I
+     added PyPy.
+   * There's a lot more you can do here, such as adding various versions of
+     dependencies in various envs (to handle the matrix we just saw).
+   * You can look at the documentation, or I'd be happy to show you some
+     examples afterwards.
 
 ----
 
@@ -479,17 +491,19 @@ Django           2.6 2.7 3.2 3.3 3.4
 
    ================== 3 passed in 0.02 seconds ===============
 
-   ... <same for py33>...
+   ... <same for py34 and pypy>...
 
    __________________ summary ________________________________
      py27: commands succeeded
-     py33: commands succeeded
+     py34: commands succeeded
+     pypy: commands succeeded
      congratulations :)
 
 ----
 
 :id: all-the-time
 :data-center: 1
+:data-reveal: 1
 
 *Running your tests*
 ====================
@@ -525,6 +539,14 @@ travis-ci.org
 .. image:: images/travis-select.png
    :width: 1000px
 
+.. note::
+
+   * To set it up, just go to travis-ci.org and sign in with your GitHub
+     account.
+   * It'll show you a list of all your public GitHub projects, and you just
+     pick which ones you want to enable.
+   * It will automatically set up a GitHub webhook for the projects you enable.
+
 ----
 
 :data-emphasize-lines-step: 1,3,8
@@ -538,12 +560,23 @@ travis-ci.org
     language: python
 
     python:
-      - 3.2
-      - 3.3
+      - 2.7
       - 3.4
+      - pypy
+
+    install:
+      - pip install pytest
 
     script:
       - py.test
+
+.. note::
+
+   * The second thing we need to do is add a ``.travis.yml`` file to the repo,
+     so Travis knows how to run our tests.
+   * This example does the same thing as our earlier ``tox.ini``.
+   * ...
+
 
 ----
 
@@ -556,6 +589,10 @@ travis-ci.org
    :height: 750px
 
 .. image:: images/travis-github.png
+
+.. note::
+
+   Simple example of a Trav
 
 ----
 
@@ -608,17 +645,79 @@ travis-ci.org
 
 ----
 
+``MANIFEST.in``
+---------------
+
+.. code::
+
+   include AUTHORS.rst
+   include CHANGES.rst
+   include LICENSE.txt
+   include MANIFEST.in
+   include README.rst
+   recursive-include docs *.rst
+
+.. note::
+
+   When Python creates a source distribution of our package, it will include
+   all of our Python packages, plus any additional files we list here.
+
+----
+
+:data-reveal: 1
+
+* ``git tag v0.1.2``
+
+* ``git push --tags``
+
+.. note::
+
+   * First thing to do is tag your release in git
+   * and make sure you push that tag to GitHub
+   * (git doesn't push tags by default)
+
+----
+
 :data-reveal: 1
 
 * ``python setup.py sdist``
 
 * ``pip install dist/PyFly-0.1.2.tar.gz``
 
-* ``python setup.py register sdist upload``
+* ``pip install twine``
+
+* ``twine upload dist/PyFly-0.1.2.tar.gz``
 
 * ``pip install PyFly``
 
 * Win!
+
+.. note::
+
+   * "sdist" == "source distribution"
+   * This is the most common format for distributing Python code, and it's a
+     good choice for pure Python (no compiled extensions).
+   * There is a new ``wheel`` format getting a lot of buzz, and it is very
+     exciting especially for Python projects with compiled extensions, but I'm
+     not going to cover it here; for your first project if it's pure Python
+     code I recommend just starting with sdist.
+   * ``python setup.py sdist`` will create an sdist for your package in the
+     ``dist/`` subdirectory.
+   * --
+   * Before we upload this sdist to the package index, we want to be sure it
+     works. We can use ``pip`` to install directly from that sdist and test to
+     make sure it works correctly.
+   * --
+   * There is a ``python setup.py`` command to upload your sdist to the package
+     index, but it uploads it over a non-SSL connection, so we'll instead use
+     the ``twine`` tool to do it securely.
+   * --
+   * Before you can do this step, you need to go to the package index in your
+     web browser to create an account and claim your package name.
+   * Then we run ``twine upload`` to create the new version, upload its
+     metadata and the sdist file.
+   * Using ``--sign`` will sign your upload with your GPG key. This is a good
+     idea, but if you don't have a GPG key you can leave that out.
 
 ----
 
@@ -628,9 +727,17 @@ travis-ci.org
 For more
 ========
 
-* `Python Packaging User Guide`_
-
 * `packaging.python.org`_
+
+* IRC: ``#pypa`` on FreeNode
+
+* ``distutils-sig@python.org`` mailing list
+
+.. note::
+
+   * Python Packaging User Guide
+   * ``#pypa`` IRC channel on FreeNode
+   * the ``distutils-sig`` mailing list
 
 ----
 
@@ -759,6 +866,13 @@ Keep the
 *tests passing*
 ===============
 
+.. note::
+
+   * I'm all excited to fix a bug I've found in your project.
+   * I download it, follow your contributing guidelines to get set up
+   * All excited to run the tests... and some of them fail.
+   * My motivation to contribute is now gone.
+
 ----
 
 :data-center: 1
@@ -770,7 +884,11 @@ Give
 ================
 
 .. note::
-   * 
+
+   * Another way to value your contributors' time is to respond quickly.
+   * You may not have time to deal with the issue right away, but you can at
+     least post a quick note thanking them for the contribution and saying
+     you'll get to it later.
 
 ----
 
