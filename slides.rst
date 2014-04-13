@@ -306,20 +306,22 @@ All the things
       import pyfly
       route = pyfly.Route('KRAP', 'CYUL')
 
-* If you haven't written restructuredtext, the basics are very easy.
-* --
-* underlined headers
-* --
-* different levels of headers
-* --
-* inline formatting: strong with double asterisk
-* --
-* inline code literals
-* --
-* code blocks, automatically syntax highlighted in pretty much any language
-* If you take five minutes and write exactly this much documentation -- a
-  simple usage example -- you've already made your package much more attractive
-  than one without docs.
+.. note::
+
+    * If you haven't written restructuredtext, the basics are very easy.
+    * --
+    * underlined headers
+    * --
+    * different levels of headers
+    * --
+    * inline formatting: strong with double asterisk
+    * --
+    * inline code literals
+    * --
+    * code blocks, automatically syntax highlighted in pretty much any language
+    * If you take five minutes and write exactly this much documentation -- a
+      simple usage example -- you've already made your package much more attractive
+      than one without docs.
 
 ----
 
@@ -484,43 +486,6 @@ Django           2.6 2.7 3.2 3.3 3.4
      py33: commands succeeded
      congratulations :)
 
-
-----
-
-:id: complex-tox
-:data-small-code: 1
-:data-emphasize-lines-step: 3,13,14,16,17
-
-.. code:: ini
-   :number-lines:
-
-   [tox]
-   envlist =
-       py27-1.4, py27-1.5, py27-1.6, py27-trunk,
-       py32-1.5, py32-1.6, py32-trunk,
-       py33-1.5, py33-1.6, py33-trunk
-
-   [testenv]
-   deps =
-       South == 0.8.1
-       coverage == 3.6
-   commands = coverage run -a setup.py test
-
-   [testenv:py27-1.4]
-   basepython = python2.7
-   deps =
-       Django == 1.4.10
-       {[base]deps}
-
-   ... <same for each env> ...
-
-.. note::
-
-   A more complex example.
-
-   Gets a bit verbose with a lot of envs, but still loads better than doing it
-   manually!
-
 ----
 
 :id: all-the-time
@@ -579,45 +544,6 @@ travis-ci.org
 
     script:
       - py.test
-
-----
-
-:id: travis-complex
-:data-small-code: 1
-:data-emphasize-lines-step: 6,10,14,15,17,22
-
-.. code:: yaml
-   :number-lines:
-
-    language: python
-    python:
-      - 2.7
-      - 3.3
-      - 3.4
-    env:
-      - DJANGO=Django==1.4.10
-      - DJANGO=Django==1.5.5
-      - DJANGO=Django==1.6.1
-    install:
-      - pip install $DJANGO
-      - pip install coverage coveralls
-    script:
-      - coverage run -a setup.py test
-      - coverage report
-    matrix:
-      exclude:
-       - python: 3.3
-         env: DJANGO=Django==1.4.10
-       - python: 3.4
-         env: DJANGO=Django==1.4.10
-    after_success: coveralls
-
-.. note::
-
-   Can also reuse your tox environments in .travis.yml via TOXENV. Or translate
-   tox.ini to .travis.yml and vice versa using panci.
-
-   I just maintain them both manually, they don't change that often.
 
 ----
 
@@ -713,8 +639,8 @@ For more
 
 .. note::
 
-   Ways you can create a happier experience for people using and contributing
-   to your software.
+   * Making life better for people using and contributing to your software.
+   * Valuing your users and contributors' time.
 
 ----
 
@@ -736,10 +662,25 @@ Semantic Versioning
 
 * `semver.org`_
 
+.. note::
+
+   * One way to value your users' time is to communicate clearly about changes
+     that will affect them.
+   * With semantic versioning, you can use your version numbers to communicate
+     this information to them.
+   * --
+   * ...
+
 ----
 
 Keep a *changelog*
 ==================
+
+.. note::
+
+   * Semantic versioning tells your users about the magnitude and type of
+     changes in a release.
+   * A changelog tells them exactly what has changed.
 
 ----
 
@@ -772,14 +713,20 @@ Keep a *changelog*
 
 .. note::
 
-   Changes relevant to users.
-
-   NOT the same as a git commit log.
+   * A sample of what a changelog can look like.
+   * People think "oh, I'll just autogenerate it from my git commit history!"
+   * NOT the same as a git commit log.
+   * Pulls out and highlights changes that are relevant to users.
 
 ----
 
 Have a *CONTRIBUTING* document
 ------------------------------
+
+.. note::
+
+   * Save time for both your contributors and yourself by having a
+     ``CONTRIBUTING`` document.
 
 ----
 
@@ -822,6 +769,9 @@ Give
 *quick feedback*
 ================
 
+.. note::
+   * 
+
 ----
 
 Give *credit*
@@ -841,6 +791,15 @@ Give *credit*
 
 Be *nice*
 =========
+
+.. note::
+
+   * Anytime you get a bug or pull request, even if it's irritating or someone
+     hasn't done their homework, it represents someone investing time and
+     energy in your project. Thank them for their time and energy!
+   * For every one person you communicate with directly in a public way, there
+     are 10, 20, 50, 100 people watching that communication, now or later. How
+     you treat contributors will affect their motivation to contribute.
 
 ----
 
