@@ -1,0 +1,218 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Set your code free: releasing and maintaining a Python project</title><meta name="generator" content="Hovercraft! 1.0 http://regebro.github.com/hovercraft"></meta><meta name="author" content="Carl Meyer"></meta><meta name="description" content="a presentation for PyCon 2014"></meta><meta name="keywords" content="presentation, python, pycon"></meta><link rel="stylesheet" href="css/hovercraft.css" media="all"></link><link rel="stylesheet" href="css/impressConsole.css" media="all"></link><link rel="stylesheet" href="css/highlight.css" media="all"></link><link rel="stylesheet" href="css/oddbird.css" media="all"></link></head><body class="impress-not-supported"><div id="impress" data-transition-duration="400"><div class="step" step="0" id="title" data-x="0" data-y="0"><h1 id="set-your-code-free">set your code free</h1><h2 id="releasing-and-maintaining-an-open-source-python-library">releasing and maintaining an open-source Python library</h2><p><div class="vcard">
+<a href="http://www.oddbird.net">
+  <img class="logo" src="images/logo.svg" alt="OddBird" class="logo" />
+</a>
+<h3 class="fn">Carl Meyer</h3>
+<ul class="links">
+  <li><a href="http://www.oddbird.net" class="org url">oddbird.net</a></li>
+  <li><a href="https://twitter.com/carljm" rel="me">@carljm</a></li>
+</ul>
+</div></p><div class="notes"><ul><li>Hi! Welcome to the final talks session of PyCon</li><li>I know it's been a long conference</li><li>I'll at least keep this short</li><li>If I'm lucky also keep you awake</li><li>and send you off on a high note, inspired to release your own software!</li></ul></div></div><div class="step" step="1" data-reveal="1" data-x="1600" data-y="0"><h1 id="you-have-code">You have <em>code!</em></h1><ul><li>You want me to <em>use</em> it (<tt>pip install</tt>).</li><li>You want me to <em>contribute</em> to it.</li></ul><div class="notes"><ul><li>The premise of this talk is that you have some code.</li><li>Writing that code is out of scope.</li><li>--</li><li><tt>pip install</tt></li><li>not web app deployment or GUI installer</li><li>--</li><li>"accept my contributions without breaking your software or losing your
+sanity"</li><li>So you look up the docs on how to do this...</li></ul></div></div><div class="step" step="2" data-center="1" data-x="3200" data-y="0"><img src="images/confused-traffic-sign.jpg" alt="" width="" height="700px"></img><div class="notes"><ul><li>...and you find lots of different projects</li><li>all with their own documentation to read</li><li>When you're doing something for the first time, choices kill.</li><li>This talk presents a set of rails for setting up your first open-source
+project..</li><li>It's not the only way, but _a_ way that will work.</li><li>Long on opinions, short on choices.</li><li>"From zero to awesome in 20 minutes."</li><li>The awesome:</li><li>public HTML docs with built-in navigation that update when you push</li><li>tests that run on every push (and on pull requests)</li><li><tt>pip install</tt> ready</li><li>welcoming to contributors.</li><li>If you've done this before, hopefully you'll still pick up a new trick or
+two.</li></ul></div></div><div class="step" step="3" data-reveal="1" data-x="4800" data-y="0"><h1 id="all-the-things">All the things</h1><ol><li>Project structure.</li><li>Choosing a license.</li><li>Code hosting.</li><li>Documentation.</li><li>Testing &amp; CI.</li><li>Packaging.</li><li>Community.</li></ol><div class="notes"><p>The roadmap for this talk.</p></div></div><div class="step" step="4" data-emphasize-lines-step="2,3,4,5,6,7,8,9,10" data-x="6400" data-y="0"><h1 id="structure"><em>01.</em> Structure</h1><pre class="highlight code"><span class="ln"> 1 </span> .
+<span class="ln"> 2 </span> &#x2514;&#x2500;&#x2500; PyFly/
+<span class="ln"> 3 </span>     &#x251C;&#x2500;&#x2500; docs/
+<span class="ln"> 4 </span>     &#x251C;&#x2500;&#x2500; pyfly/
+<span class="ln"> 5 </span>     &#x2502;&#xA0;&#xA0; &#x2514;&#x2500;&#x2500; __init__.py
+<span class="ln"> 6 </span>     &#x251C;&#x2500;&#x2500; tests/
+<span class="ln"> 7 </span>     &#x251C;&#x2500;&#x2500; LICENSE.txt
+<span class="ln"> 8 </span>     &#x251C;&#x2500;&#x2500; MANIFEST.in
+<span class="ln"> 9 </span>     &#x251C;&#x2500;&#x2500; README.rst
+<span class="ln">10 </span>     &#x2514;&#x2500;&#x2500; setup.py</pre><div class="notes"><ul><li>This is the bare bones;</li><li>We'll flesh this out and add to it as we go.</li></ul></div></div><div class="step" step="5" data-reveal="1" data-x="8000" data-y="0"><h1 id="license"><em>02.</em> License</h1><ul><li>The <strong>conditions</strong> for my use.</li><li><strong>No license</strong> means <strong>I can't use it</strong>.</li><li>If you aren't sure, use <a href="http://opensource.org/licenses/BSD-3-Clause">BSD</a> or <a href="http://opensource.org/licenses/MIT">MIT</a>.</li><li>Or (L) <a href="http://opensource.org/licenses/gpl-license">GPL</a>, <a href="http://opensource.org/licenses/Apache-2.0">Apache</a>, <a href="http://opensource.org/licenses/MPL-2.0">MPL</a>.</li><li>Don't use anything else.</li><li>H/t: <a href="https://twitter.com/jacobian">@jacobian</a> 's <a href="http://www.youtube.com/watch?v=vhuF0oalOi8">lightning talk</a>.</li></ul><div class="notes"><ul><li>First decision: releasing software as open source means choosing a
+license.</li><li>I am not a lawyer, this is not legal advice.</li><li>--</li><li>Your license is the conditions under which I can use your code.</li><li>--</li><li>If you don't have a license, the default is "all rights reserved."</li><li>A project without a license is not open-source, even if its on GitHub!</li><li>--</li><li>BSD or MIT are unrestrictive licenses;</li><li>All you ask from your users is that they credit you: keep your name and
+the license attached to your work.</li><li>--</li><li>GPL is more restrictive; requires that any work derived from yours must
+also be released as GPL. If you're worried about freeloaders, you can go
+this route, at the cost of having fewer users.</li><li>Apache and MPL are reasonable choices if you know why you're choosing
+them.</li><li>--</li></ul></div></div><div class="step" step="6" id="license" data-x="9600" data-y="0"><h1 id="license-txt"><tt>LICENSE.txt</tt></h1><pre class="highlight code"><span class="ln"> 1 </span> Copyright (c) 2009-2014, Carl Meyer and contributors
+<span class="ln"> 2 </span> All rights reserved.
+<span class="ln"> 3 </span>
+<span class="ln"> 4 </span> Redistribution and use in source and binary forms, with or without
+<span class="ln"> 5 </span> modification, are permitted provided that the following conditions are
+<span class="ln"> 6 </span> met:
+<span class="ln"> 7 </span>
+<span class="ln"> 8 </span>     * Redistributions of source code must retain the above copyright
+<span class="ln"> 9 </span>       notice, this list of conditions and the following disclaimer.
+<span class="ln">10 </span>     * Redistributions in binary form must reproduce the above
+<span class="ln">11 </span>       copyright notice, this list of conditions and the following
+<span class="ln">12 </span>       disclaimer in the documentation and/or other materials provided
+<span class="ln">13 </span>       with the distribution.
+<span class="ln">14 </span>
+<span class="ln">15 </span> THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+<span class="ln">16 </span> "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+<span class="ln">17 </span> LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+<span class="ln">18 </span> A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+<span class="ln">19 </span> OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+<span class="ln">20 </span> SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+<span class="ln">21 </span> LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+<span class="ln">22 </span> DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+<span class="ln">23 </span> THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+<span class="ln">24 </span> (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+<span class="ln">25 </span> OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</pre></div><div class="step" step="7" data-reveal="1" data-x="11200" data-y="0"><h1 id="code-hosting"><em>03.</em> Code hosting</h1><ul><li><a href="https://github.com/">GitHub</a>.</li><li>That's where the people are.</li></ul><div class="notes"><ul><li>We have a lot of areas to cover,</li><li>--</li><li>so fortunately some are short and sweet.</li></ul></div></div><div class="step" step="8" data-reveal="1" data-x="12800" data-y="0"><h1 id="docs"><em>04.</em> Docs</h1><ul><li>If it's not documented, it doesn't exist.</li><li>Build it with <a href="http://sphinx-doc.org/">Sphinx</a>.</li><li>Host it at <a href="https://readthedocs.org/">ReadTheDocs</a>.</li></ul><div class="notes"><ul><li>--</li><li>I like reading code. I will read code to find a bug, to fix a bug, or to
+better understand how your library does what it does.</li><li>But if I have to read your code to figure out how to use your thing -- I'm
+gonna choose a different library, or just write it myself instead.</li><li>Auto-generated API docs don't count, unless your API is very simple. A
+long list of functions and classes with their docstrings is something I
+can get from reading your code.</li><li>How to write your docs: fortunately another easy choice.</li><li>--</li><li>And so is where to host it.</li><li>The combination of Sphinx and Read The Docs makes it so ridiculously easy
+to put beautiful, usable docs online, it's a shame not to take advantage
+of that by writing some!</li></ul></div></div><div class="step" step="9" data-emphasize-lines-step="1,4,6,10,12" data-x="14400" data-y="0"><pre class="highlight code"><span class="ln"> 1 </span>$ pip install sphinx
+<span class="ln"> 2 </span>...
+<span class="ln"> 3 </span>
+<span class="ln"> 4 </span>$ cd docs/
+<span class="ln"> 5 </span>
+<span class="ln"> 6 </span>$ sphinx-quickstart
+<span class="ln"> 7 </span>...
+<span class="ln"> 8 </span>
+<span class="ln"> 9 </span>Enter the root path for documentation.
+<span class="ln">10 </span>&gt; Root path for the documentation [.]:
+<span class="ln">11 </span>
+<span class="ln">12 </span>...</pre><div class="notes"><ul><li>You can write some sphinx docs in about as much time as I'll spend on the
+next two slides.</li><li>--</li><li>pip install sphinx</li><li>--</li><li>switch to the docs directory</li><li>--</li><li>run 'sphinx-quickstart'</li><li>--</li><li>answer some questions; the defaults will do</li></ul></div></div><div class="step" step="10" data-emphasize-lines-step="1,2,3,4,5,6,10" data-x="16000" data-y="0"><h1 id="docs-index-rst"><tt>docs/index.rst</tt></h1><pre class="highlight code rst"><span class="ln"> 1 </span><span class="gh">Welcome to PyFly!</span>
+<span class="ln"> 2 </span><span class="gh">=================</span>
+<span class="ln"> 3 </span><span class="gh">Installing</span>
+<span class="ln"> 4 </span><span class="gh">----------</span>
+<span class="ln"> 5 </span>Install <span class="gs">**PyFly**</span> with
+<span class="ln"> 6 </span><span class="s">``pip install PyFly``</span>.
+<span class="ln"> 7 </span>
+<span class="ln"> 8 </span><span class="gh">Usage</span>
+<span class="ln"> 9 </span><span class="gh">-----</span>
+<span class="ln">10 </span>Find a route<span class="se">::</span>
+<span class="ln">11 </span>
+<span class="ln">12 </span><span class="s">   import pyfly</span>
+<span class="ln">13 </span><span class="s">   route = pyfly.Route('KRAP', 'CYUL')</span></pre><div class="notes"><ul><li>If you haven't written restructuredtext, the basics are very easy.</li><li>--</li><li>underlined headers</li><li>--</li><li>different levels of headers</li><li>--</li><li>inline formatting: strong with double asterisk</li><li>--</li><li>inline code literals</li><li>--</li><li>code blocks, automatically syntax highlighted in pretty much any language</li><li>If you take five minutes and write exactly this much documentation -- a
+simple usage example -- you've already made your package much more
+attractive than one without docs.</li></ul></div></div><div class="step" step="11" data-x="17600" data-y="0"><h1 id="make-html"><tt>make html</tt></h1><div class="notes"><ul><li>Run 'make html' to generate an HTML version of your docs</li></ul></div></div><div class="step" step="12" data-center="1" data-fullwidth="1" data-x="19200" data-y="0"><img src="images/docs-local.png" alt="" width="1000px" height=""></img></div><div class="step" step="13" id="rtd" data-fullwidth="1" data-center="1" data-x="20800" data-y="0"><img src="images/rtd-create-header.png" alt="" width="1000px" height=""></img><img src="images/rtd-webhook.png" alt="" width="" height=""></img></div><div class="step" step="14" data-fullwidth="1" data-center="1" data-x="22400" data-y="0"><img src="images/rtd-docs.png" alt="" width="1000px" height=""></img><div class="notes"><ul><li>Automatically updates the docs every time you push to the repo.</li><li>Can build multiple different versions (by branch or tag) and provides a
+version switcher to choose between them.</li><li>Good-looking, mobile-responsive theme.</li><li>Win!</li></ul></div></div><div class="step" step="15" data-reveal="1" data-x="24000" data-y="0"><h1 id="testing"><em>05.</em> Testing</h1><ul><li>If it's not tested, it's broken.</li></ul><div class="notes"><ul><li>If code is changing over time, and you don't have automated tests for it
+(or a lot of time on your hands for testing manually), over time the
+likelihood of that code being broken approaches 1.</li><li>Tests are good for any code, but they are critical for open-source code
+that is getting contributions. Finding time to handle pull requests is
+hard enough, you really don't want to have to run through a bunch of
+manual tests for every pull request to verify that it didn't break things.</li></ul></div></div><div class="step" step="16" id="matrix" data-x="25600" data-y="0"><table cellpadding="0" cellspacing="0"><thead><tr><th><p>Versions</p></th><th colspan="5"><p>Python</p></th></tr><tr><th><p>Django</p></th><th><p>pypy</p></th><th><p>2.7</p></th><th><p>3.2</p></th><th><p>3.3</p></th><th><p>3.4</p></th></tr></thead><tbody><tr><td><p><strong>1.4.10</strong></p></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><p><strong>1.5.5</strong></p></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><p><strong>1.6.2</strong></p></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><p><strong>1.7-alpha</strong></p></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td><p><strong>master</strong></p></td><td></td><td></td><td></td><td></td><td></td></tr></tbody></table><div class="notes"><p>A reasonable support matrix for a popular Django add-on library.</p><p>Could be worse: with another dependency or two it would have 3 or 4
+dimensions, not just 2.</p><p>25 boxes in that matrix. Are you gonna create 25 virtualenvs and run the
+tests 25 times for every pull request to your project? If not, your claim to
+support all those versions is purely theoretical, and almost certainly not
+true.</p><p>Thankfully, there's a tool to help with this: ...</p></div></div><div class="step" step="17" data-reveal="1" data-x="27200" data-y="0"><h1 id="tox-saves-the-day"><a href="http://tox.readthedocs.org/en/latest/">tox</a> saves the day</h1><ul><li>Creates a bunch of virtualenvs.</li><li>Runs your tests in each of them.</li></ul><div class="notes"><ul><li>With one command...</li><li>--</li><li>...</li></ul></div></div><div class="step" step="18" data-emphasize-lines-step="2,5,6" data-x="28800" data-y="0"><h1 id="tox-ini"><tt>tox.ini</tt></h1><pre class="highlight code ini"><span class="ln">1 </span><span class="k">[tox]</span>
+<span class="ln">2 </span><span class="na">envlist</span> <span class="o">=</span> <span class="s">py27,py34,pypy</span>
+<span class="ln">3 </span>
+<span class="ln">4 </span><span class="k">[testenv]</span>
+<span class="ln">5 </span><span class="na">deps</span> <span class="o">=</span> <span class="s">pytest</span>
+<span class="ln">6 </span><span class="na">commands</span> <span class="o">=</span> <span class="s">py.test</span></pre><div class="notes"><ul><li>A very simple tox setup: just three Python versions, no dependencies.</li><li>Originally I had just 2.7 and 3.4, but I made the mistake of letting Alex
+Gaynor see my slides, and he tied me up and wouldn't let me go until I
+added PyPy.</li><li>There's a lot more you can do here, such as adding various versions of
+dependencies in various envs (to handle the matrix we just saw).</li><li>You can look at the documentation, or I'd be happy to show you some
+examples afterwards.</li></ul></div></div><div class="step" step="19" id="running-tox" data-small-code="1" data-emphasize-lines-step="1,2,3,4,5,6,11,15,18,19,20" data-pytest-highlight="1" data-x="30400" data-y="0"><pre class="highlight code"><span class="ln"> 1 </span>$ tox
+<span class="ln"> 2 </span>GLOB sdist-make: /.../PyFly/setup.py
+<span class="ln"> 3 </span>py27 create: /.../PyFly/.tox/py27
+<span class="ln"> 4 </span>py27 installdeps: pytest
+<span class="ln"> 5 </span>py27 inst: /.../PyFly/.tox/dist/PyFly-0.1.zip
+<span class="ln"> 6 </span>py27 runtests: commands[0] | py.test
+<span class="ln"> 7 </span>================== test session starts ====================
+<span class="ln"> 8 </span>platform linux -- Python 2.7.6 -- py-1.4.20 -- pytest-2.5.2
+<span class="ln"> 9 </span>collected 3 items
+<span class="ln">10 </span>
+<span class="ln">11 </span>test_routes.py ...
+<span class="ln">12 </span>
+<span class="ln">13 </span>================== 3 passed in 0.02 seconds ===============
+<span class="ln">14 </span>
+<span class="ln">15 </span>... &lt;same for py34 and pypy&gt;...
+<span class="ln">16 </span>
+<span class="ln">17 </span>__________________ summary ________________________________
+<span class="ln">18 </span>  py27: commands succeeded
+<span class="ln">19 </span>  py34: commands succeeded
+<span class="ln">20 </span>  pypy: commands succeeded
+<span class="ln">21 </span>  congratulations :)</pre></div><div class="step" step="20" id="all-the-time" data-center="1" data-reveal="1" data-x="32000" data-y="0"><h1 id="running-your-tests"><em>Running your tests</em></h1><h1 id="all-the-time">all the time</h1><div class="notes"><p>You get a pull request, you open a terminal, you add the source of the PR as
+a remote, you pull their branch, you run tox... wouldn't it be nice if when
+you first looked at the pull request, it already told you whether the tests
+passed or not?</p><p>This used to be hard. Today it is easy.</p></div></div><div class="step" step="21" data-x="33600" data-y="0"><h1 id="travis-ci-org">travis-ci.org</h1><div class="notes"><p>Will do this for free for public GitHub projects.</p><p>(There's also drone.io and probably others; Travis is the one I've used.)</p></div></div><div class="step" step="22" data-fullwidth="1" data-center="1" data-x="35200" data-y="0"><img src="images/travis-select.png" alt="" width="1000px" height=""></img><div class="notes"><ul><li>To set it up, just go to travis-ci.org and sign in with your GitHub
+account.</li><li>It'll show you a list of all your public GitHub projects, and you just
+pick which ones you want to enable.</li><li>It will automatically set up a GitHub webhook for the projects you enable.</li></ul></div></div><div class="step" step="23" data-emphasize-lines-step="1,3,8" data-x="36800" data-y="0"><h1 id="travis-yml"><tt>.travis.yml</tt></h1><pre class="highlight code yaml"><span class="ln"> 1 </span> <span class="l-Scalar-Plain">language</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">python</span>
+<span class="ln"> 2 </span>
+<span class="ln"> 3 </span> <span class="l-Scalar-Plain">python</span><span class="p-Indicator">:</span>
+<span class="ln"> 4 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">2.7</span>
+<span class="ln"> 5 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">3.4</span>
+<span class="ln"> 6 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pypy</span>
+<span class="ln"> 7 </span>
+<span class="ln"> 8 </span> <span class="l-Scalar-Plain">install</span><span class="p-Indicator">:</span>
+<span class="ln"> 9 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">pip install pytest</span>
+<span class="ln">10 </span>
+<span class="ln">11 </span> <span class="l-Scalar-Plain">script</span><span class="p-Indicator">:</span>
+<span class="ln">12 </span>   <span class="p-Indicator">-</span> <span class="l-Scalar-Plain">py.test</span></pre><div class="notes"><ul><li>The second thing we need to do is add a <tt>.travis.yml</tt> file to the repo,
+so Travis knows how to run our tests.</li><li>This example does the same thing as our earlier <tt>tox.ini</tt>.</li><li>...</li></ul></div></div><div class="step" step="24" id="travis-results" data-reveal="1" data-fullwidth="1" data-center="1" data-x="38400" data-y="0"><img src="images/travis-results.png" alt="" width="" height="750px"></img><img src="images/travis-github.png" alt="" width="" height=""></img><div class="notes"><p>Simple example of a Trav</p></div></div><div class="step" step="25" data-x="40000" data-y="0"><h1 id="packaging"><em>06.</em> Packaging</h1><div class="notes"><p>Oh yes, you may want people to be able to install your thing!</p></div></div><div class="step" step="26" data-x="41600" data-y="0"><h1 id="setup-py"><tt>setup.py</tt></h1></div><div class="step" step="27" id="setup-py" data-small-code="1" data-emphasize-lines-step="1,3,4,6,7,8,9,10,11,12,13,14,15,16" data-x="43200" data-y="0"><pre class="highlight code python"><span class="ln"> 1 </span> <span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+<span class="ln"> 2 </span>
+<span class="ln"> 3 </span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'README.rst'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+<span class="ln"> 4 </span>     <span class="n">long_description</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="ln"> 5 </span>
+<span class="ln"> 6 </span> <span class="n">setup</span><span class="p">(</span>
+<span class="ln"> 7 </span>     <span class="n">name</span><span class="o">=</span><span class="s">'PyFly'</span><span class="p">,</span>
+<span class="ln"> 8 </span>     <span class="n">version</span><span class="o">=</span><span class="s">'0.1.2'</span><span class="p">,</span>
+<span class="ln"> 9 </span>     <span class="n">description</span><span class="o">=</span><span class="s">'Flying with Python'</span><span class="p">,</span>
+<span class="ln">10 </span>     <span class="n">long_description</span><span class="o">=</span><span class="n">long_description</span><span class="p">,</span>
+<span class="ln">11 </span>     <span class="n">author</span><span class="o">=</span><span class="s">'Carl Meyer'</span><span class="p">,</span>
+<span class="ln">12 </span>     <span class="n">author_email</span><span class="o">=</span><span class="s">'carl@oddbird.net'</span><span class="p">,</span>
+<span class="ln">13 </span>     <span class="n">url</span><span class="o">=</span><span class="s">'https://github.com/oddbird/PyFly/'</span><span class="p">,</span>
+<span class="ln">14 </span>     <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s">'pyfly'</span><span class="p">],</span>
+<span class="ln">15 </span>     <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s">'six'</span><span class="p">],</span>
+<span class="ln">16 </span>     <span class="n">classifiers</span><span class="o">=</span><span class="p">[</span>
+<span class="ln">17 </span>         <span class="s">'Development Status :: 3 - Alpha'</span><span class="p">,</span>
+<span class="ln">18 </span>         <span class="s">'License :: OSI Approved :: BSD License'</span><span class="p">,</span>
+<span class="ln">19 </span>         <span class="s">'Programming Language :: Python'</span><span class="p">,</span>
+<span class="ln">20 </span>         <span class="s">'Programming Language :: Python :: 2.7'</span><span class="p">,</span>
+<span class="ln">21 </span>         <span class="s">'Programming Language :: Python :: 3'</span><span class="p">,</span>
+<span class="ln">22 </span>         <span class="s">'Programming Language :: Python :: 3.3'</span><span class="p">,</span>
+<span class="ln">23 </span>         <span class="s">'Programming Language :: Python :: 3.4'</span><span class="p">,</span>
+<span class="ln">24 </span>     <span class="p">],</span>
+<span class="ln">25 </span> <span class="p">)</span></pre></div><div class="step" step="28" data-x="44800" data-y="0"><h1 id="manifest-in"><tt>MANIFEST.in</tt></h1><pre class="highlight code">include AUTHORS.rst
+include CHANGES.rst
+include LICENSE.txt
+include MANIFEST.in
+include README.rst
+recursive-include docs *.rst</pre><div class="notes"><p>When Python creates a source distribution of our package, it will include
+all of our Python packages, plus any additional files we list here.</p></div></div><div class="step" step="29" data-reveal="1" data-x="46400" data-y="0"><ul><li><tt>git tag v0.1.2</tt></li><li><tt>git push --tags</tt></li></ul><div class="notes"><ul><li>First thing to do is tag your release in git</li><li>and make sure you push that tag to GitHub</li><li>(git doesn't push tags by default)</li></ul></div></div><div class="step" step="30" data-reveal="1" data-x="48000" data-y="0"><ul><li><tt>python setup.py sdist</tt></li><li><tt>pip install dist/PyFly-0.1.2.tar.gz</tt></li><li><tt>pip install twine</tt></li><li><tt>twine upload dist/PyFly-0.1.2.tar.gz</tt></li><li><tt>pip install PyFly</tt></li><li>Win!</li></ul><div class="notes"><ul><li>"sdist" == "source distribution"</li><li>This is the most common format for distributing Python code, and it's a
+good choice for pure Python (no compiled extensions).</li><li>There is a new <tt>wheel</tt> format getting a lot of buzz, and it is very
+exciting especially for Python projects with compiled extensions, but I'm
+not going to cover it here; for your first project if it's pure Python
+code I recommend just starting with sdist.</li><li><tt>python setup.py sdist</tt> will create an sdist for your package in the
+<tt>dist/</tt> subdirectory.</li><li>--</li><li>Before we upload this sdist to the package index, we want to be sure it
+works. We can use <tt>pip</tt> to install directly from that sdist and test to
+make sure it works correctly.</li><li>--</li><li>There is a <tt>python setup.py</tt> command to upload your sdist to the package
+index, but it uploads it over a non-SSL connection, so we'll instead use
+the <tt>twine</tt> tool to do it securely.</li><li>--</li><li>Before you can do this step, you need to go to the package index in your
+web browser to create an account and claim your package name.</li><li>Then we run <tt>twine upload</tt> to create the new version, upload its
+metadata and the sdist file.</li><li>Using <tt>--sign</tt> will sign your upload with your GPG key. This is a good
+idea, but if you don't have a GPG key you can leave that out.</li></ul></div></div><div class="step" step="31" id="pug" data-reveal="1" data-x="49600" data-y="0"><h1 id="for-more">For more</h1><ul><li><a href="http://packaging.python.org/">packaging.python.org</a></li><li>IRC: <tt>#pypa</tt> on FreeNode</li><li><tt>distutils-sig@python.org</tt> mailing list</li></ul><div class="notes"><ul><li>Python Packaging User Guide</li><li><tt>#pypa</tt> IRC channel on FreeNode</li><li>the <tt>distutils-sig</tt> mailing list</li></ul></div></div><div class="step" step="32" data-x="51200" data-y="0"><h1 id="community"><em>07.</em> Community</h1><div class="notes"><ul><li>Making life better for people using and contributing to your software.</li><li>Valuing your users and contributors' time.</li></ul></div></div><div class="step" step="33" id="semver" data-reveal="1" data-x="52800" data-y="0"><h1 id="semantic-versioning">Semantic Versioning</h1><ul><li>X.Y.Z</li><li>increment:</li><li><em>X</em> for breaking changes.</li><li><em>Y</em> for backwards-compatible feature additions.</li><li><em>Z</em> for bug fixes.</li><li><a href="http://semver.org">semver.org</a></li></ul><div class="notes"><ul><li>One way to value your users' time is to communicate clearly about changes
+that will affect them.</li><li>With semantic versioning, you can use your version numbers to communicate
+this information to them.</li><li>--</li><li>...</li></ul></div></div><div class="step" step="34" data-x="54400" data-y="0"><h1 id="keep-a-changelog">Keep a <em>changelog</em></h1><div class="notes"><ul><li>Semantic versioning tells your users about the magnitude and type of
+changes in a release.</li><li>A changelog tells them exactly what has changed.</li></ul></div></div><div class="step" step="35" id="changes" data-small-code="1" data-x="56000" data-y="0"><h1 id="changes-rst"><tt>CHANGES.rst</tt></h1><pre class="highlight code rst"><span class="gh">CHANGES</span>
+<span class="gh">=======</span>
+
+<span class="gh">master (unreleased)</span>
+<span class="gh">-------------------</span>
+
+<span class="gh">2.0.3 (2014.03.19)</span>
+<span class="gh">-------------------</span>
+
+<span class="m">*</span> Fix <span class="s">``get_query_set``</span> vs <span class="s">``get_queryset``</span>
+  in <span class="s">``PassThroughManager``</span> for Django &lt;1.6.
+  Thanks whop, Bojan Mihelac, Daniel Shapiro,
+  and Matthew Schinckel for the report;
+  Matthew for the fix. Merge of GH-121.
+
+<span class="m">*</span> Fix <span class="s">``FieldTracker``</span> with deferred model
+  attributes. Thanks Michael van Tellingen.
+  Merge of GH-115.</pre><div class="notes"><ul><li>A sample of what a changelog can look like.</li><li>People think "oh, I'll just autogenerate it from my git commit history!"</li><li>NOT the same as a git commit log.</li><li>Pulls out and highlights changes that are relevant to users.</li></ul></div></div><div class="step" step="36" data-x="57600" data-y="0"><h1 id="have-a-contributing-document">Have a <em>CONTRIBUTING</em> document</h1><div class="notes"><ul><li>Save time for both your contributors and yourself by having a
+<tt>CONTRIBUTING</tt> document.</li></ul></div></div><div class="step" step="37" id="contributing" data-reveal="1" data-x="59200" data-y="0"><h1 id="contributing-rst"><tt>CONTRIBUTING.rst</tt></h1><ul><li>How to get set up for development.</li><li>How to run the tests.</li><li>What to include in a bug report.</li><li>Coding standards, test coverage standards...</li><li><img src="images/github-contributing.png" alt="github-contrib" width="800px" height=""></img></li></ul></div><div class="step" step="38" data-center="1" data-x="60800" data-y="0"><h1 id="keep-the">Keep the</h1><h1 id="tests-passing"><em>tests passing</em></h1><div class="notes"><ul><li>I'm all excited to fix a bug I've found in your project.</li><li>I download it, follow your contributing guidelines to get set up</li><li>All excited to run the tests... and some of them fail.</li><li>My motivation to contribute is now gone.</li></ul></div></div><div class="step" step="39" data-center="1" data-x="62400" data-y="0"><h1 id="give">Give</h1><h1 id="quick-feedback"><em>quick feedback</em></h1><div class="notes"><ul><li>Another way to value your contributors' time is to respond quickly.</li><li>You may not have time to deal with the issue right away, but you can at
+least post a quick note thanking them for the contribution and saying
+you'll get to it later.</li></ul></div></div><div class="step" step="40" data-x="64000" data-y="0"><h1 id="give-credit">Give <em>credit</em></h1><div class="notes"><ul><li>When people pitch in, give them props!</li><li>In the commit message, in the changelog, in an <tt>AUTHORS</tt> file...</li><li>Motivates people to contribute.</li><li>Give commit access to helpful contributors!</li><li>Not as technically important with DVCS as it used to be, but a mark of
+confidence, will motivate greater involvement (and saves you work).</li><li>Someday you'll want to hand off maintenance...</li></ul></div></div><div class="step" step="41" data-x="65600" data-y="0"><h1 id="be-nice">Be <em>nice</em></h1><div class="notes"><ul><li>Anytime you get a bug or pull request, even if it's irritating or someone
+hasn't done their homework, it represents someone investing time and
+energy in your project. Thank them for their time and energy!</li><li>For every one person you communicate with directly in a public way, there
+are 10, 20, 50, 100 people watching that communication, now or later. How
+you treat contributors will affect their motivation to contribute.</li></ul></div></div><div class="step" step="42" id="questions" data-x="67200" data-y="0"><h1 id="questions">Questions?</h1><p><a href="http://oddbird.net/set-your-code-free-preso">oddbird.net/set-your-code-free-preso</a></p><p><div class="vcard">
+<a href="http://www.oddbird.net">
+  <img class="logo" src="images/logo.svg" alt="OddBird" class="logo" />
+</a>
+<h3 class="fn">Carl Meyer</h3>
+<ul class="links">
+  <li><a href="http://www.oddbird.net" class="org url">oddbird.net</a></li>
+  <li><a href="https://twitter.com/carljm" rel="me">@carljm</a></li>
+</ul>
+</div></p></div></div><div id="hovercraft-help" class="hide"><table><tr><th>Space</th><td>Forward</td></tr><tr><th>Left, Down, Page Down</th><td>Next slide</td></tr><tr><th>Right, Up, Page Up</th><td>Previous slide</td></tr><tr><th>P</th><td>Open presenter console</td></tr><tr><th>H</th><td>Toggle this help</td></tr></table></div><script type="text/javascript" src="js/jquery-2.1.0.min.js"></script><script type="text/javascript" src="js/oddbird.js"></script><script type="text/javascript" src="js/impress.js"></script><script type="text/javascript" src="js/impressConsole.js"></script><script type="text/javascript" src="js/hovercraft.js"></script></body></html>
